@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Kevin Munger</title>
+
+  <meta name="robots" content="noindex">
+
+  <link rel="stylesheet" href="css/normalize.css">
+
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+
+  <body>
+
+  <div class="col-md-9">
+  <img src="images/p4k_final" width=150>
+	<h3 align="center"><strong></strong></h3>
+	<p>Pitchfork didn't get to be Pitchfork by being nice, and neither did its reviewers. But which Pitchfork writer is the harshest? I wanted to know, so I found out. </p>
+
+	<p>I started by using <a href="https://www.kimonolabs.com/">Kimono</a> to crawl the 500 most recent pages of the Pitchfork Reviews website for the name and artist of the 10000 most recent albums. I then modified an <a href="https://github.com/michalczaplinski/pitchfork">API I found </a>to allow me to use <a href="https://github.com/Ch4dd/DataJournalism/blob/master/P4k%20Scraper.py">Python</a> to scrape the text, score and author the these 10000 reviews.</p> 
+
+	<p>I used those data to train <a href="https://github.com/Ch4dd/DataJournalism/blob/master/P4k%20Analysis.R">(in R)</a> a machine learning algorithm called Elastic Net to learn what words were associated with more positive reviews, and which words were associated with more negative reviews. In general, the algorithm performed fairly well, but it couldn't have been perfect. First, each person has an idiosyncratic writing style, so there's going to be some error introduced by the way that different people use the same word differently. If that were the only problem, the errors would be randomly distributed across each reviewer.</p> 
+	
+	<p>Crucially, though, some reviewers are harsher than others--given than an album gets a score of 6.9, someone might write a review that is predicted to be a 6.5, and someone else might write a review that is predicted to be a 7.5. And if a particular author tends to be especially harsh, averaged over their entire critical ovary, we can detect that trend. To ensure that the sample size for each person was reasonably large, I only included authors who had written at least 25 reviews.</p>
+	
+	<p>So, as you can see, Scott Plagenhoef is the harshest reviewer! Which makes sense, because he founded Pitchfork and was highly influential in setting the tone of the tone for the site! I was personally unfamiliar with the man before doing this analysis, but this result lends credibility to my approach. Also promising: "Grayson Currin" and "Grayson Haver Currin" get almost exactly the same score.</p>
+
+	<p>Other than Plagenhoef, the harshest reviewers by a fair margin are Amanda Petrusich and Andy Battaglia. I have no idea to interpret this; if anyone can confirm that these people are assholes, that would be dope. </p>
+
+	<p>On the other end of the spectrum, we see that Liz Colville is the nicest reviewer! (I also have no idea who this person is. But I assume she's nice.)</p>
+
+	<p>And finally, the most accurate reviewer is Zach Kelly. Congrats, Zach, for your objectivity! </p>
+
+<p><small>Technical notes: 
+There is a mechanical relationship between the number of reviews a person has written and the predictive accuracy for that person, but the correlation is only about %20, so ¯\_(ツ)_/¯ </small></p>
+
+
+  </div>
+
+</body>
+
+</html>
