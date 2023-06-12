@@ -90,7 +90,7 @@
 \caption{\textbf{The tortoise and the hare.}}
 \floatfoot{\normalsize \textit{Note.} The tortoise and the hare may or may not be friends.  But if you want to write moredetails about the figure, please do it here in the note, not the main caption.}
 \end{figure}
-\lipsum[2] He wrote a:
+\lipsum[2] He wrote:
 
 \begin{quotation}
   \lipsum[10] \citep{citation1} 
