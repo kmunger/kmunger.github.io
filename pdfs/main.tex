@@ -1,0 +1,124 @@
+\documentclass[12pt,twoside]{article}
+\renewcommand{\abstractname}{\vspace{-\baselineskip}}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\urlstyle{same}
+\usepackage{geometry}
+ \geometry{left=1.25in, right= 1.25in ,top=1.7in}
+\setlength{\parindent}{.5in}
+\renewcommand{\baselinestretch}{1.3}
+\setlength{\parskip}{\baselineskip}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\captionsetup{font={normalsize,stretch=1}}
+\renewcommand{\headrulewidth}{0pt}
+\usepackage[labelfont=bf]{caption}
+\captionsetup[figure]{labelfont={bf},name={Figure},labelsep=period}
+\usepackage{natbib}
+\setlength{\bibhang}{0.5in}
+\bibliographystyle{apalike}
+\usepackage{graphicx}
+%\usepackage{float}
+\usepackage{floatrow}
+\floatsetup[table]{capposition=top}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{titling}
+\settowidth{\thanksmarkwidth}{*}
+\setlength{\thanksmargin}{-\thanksmarkwidth}
+\usepackage[hang,flushmargin]{footmisc}
+\setlength{\skip\footins}{1.2pc plus 5pt minus 2pt}
+\usepackage{titlesec}
+\setlength{\droptitle}{-5em}
+\setlength\thanksmarkwidth{.5em}
+\setlength\thanksmargin{-\thanksmarkwidth}
+\titleformat{\section}{\normalfont\bfseries\filcenter}{}{0pt}{}
+\titleformat{\subsection}{\normalfont\bfseries\filcenter}{}{0pt}{\itshape}
+\titleformat{\subsubsection}{\normalfont\bfseries\filcenter}{}{0pt}{\itshape}
+\titlespacing*{\section}
+  {0pt}{-.1\baselineskip}{-.1\baselineskip}  
+\titlespacing*{\subsection}
+   {0pt}{-.1\baselineskip}{-.1\baselineskip}  
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\fontspec{Times New Roman}
+\date{}
+\providecommand{\keywords}[1]
+{
+   \small	
+  \textit{\hspace{-1em} Keywords: } #1
+}
+\newfontfamily\headingfont[]{Arial}
+%Add Author names to headers and footers here:
+\fancypagestyle{firstpage}{
+  \fancyhf{}% clear all fields
+  \fancyfoot[L]{ \footnotesize Copyright \copyright 2021 (Author1 and Author2). Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License. Available at: \url{http://journalqd.org}} 
+  \lhead{ \footnotesize Journal of Quantitative Description: Digital Media 1(2021), 1–n} %Replace n with number of last page, including the Online Appendix.
+\rhead{ \footnotesize 10.51685/jqd.2021.XXX}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{ \footnotesize Journal of Quantitative Description: Digital Media 1(2021)}
+\fancyhead[RO]{ \footnotesize Short Title \thepage} %Select Short Title with fewer than 35 characters.
+\fancyhead[LE]{ \footnotesize Author1 and Author2} %(or Author1 et al.)
+\fancyhead[RE]{ \footnotesize Journal of Quantitative Description: Digital Media 1(2021) \thepage}
+
+%Article Title goes here
+\title{\normalsize \headingfont \textbf{JQD Template} \vspace{-1.5em}} 
+%Author names and affiliations go here in the single \author{} , put authors' contact information in \thanks{}. Use extra spacing: \vspace{1em} to separate authors (unless the authors share the same affiliation.  
+\author{\normalsize FIRST AUTHOR NAME\\ \normalsize Institution, Country 
+\vspace{1em} \\ \normalsize SECOND AUTHOR NAME \\ \normalsize THIRD AUTHOR NAME \\ \normalsize Institution, Country \thanks{\hspace{-1em} Author 1: author1's email address} \thanks{\hspace{-1em} Author 2: author2's email address} \thanks{\hspace{-1em} Date submitted: XXXX-XX-XX}} 
+\usepackage{lipsum}
+\renewcommand\footnotemark{}
+\begin{document}
+\maketitle
+\thispagestyle{firstpage}
+\vspace{-8em}
+\begin{abstract}
+  \noindent \textbf{Abstract must be maximum 250 words.} \lipsum[5]
+\end{abstract}
+
+\keywords{\textit{tortoise, hare, friendship} \vspace{8ex}}
+
+\lipsum[4-5]
+\section{Sub-Head}
+\lipsum[6-7]\footnote{ \lipsum[2] }
+\begin{figure}[H]
+\includegraphics[]{figure1.png}
+\caption{\textbf{The tortoise and the hare.}}
+\floatfoot{\normalsize \textit{Note.} The tortoise and the hare may or may not be friends.  But if you want to write moredetails about the figure, please do it here in the note, not the main caption.}
+\end{figure}
+\lipsum[2] He wrote:
+
+\begin{quotation}
+  \lipsum[10] \citep{citation1} 
+ \end{quotation}
+ 
+\subsection{2nd Level Sub-Head}
+\lipsum[7]
+
+\begin{table}[H]
+\caption{\textbf{Sample Descriptives.}}
+\begin{tabularx}{\textwidth}{ X c }
+\toprule
+ Variable & Mean (SD)  \\ 
+ \midrule
+
+ \bottomrule
+ \textit{Note.} The tortoise and the hare may or may not be friends.
+\end{tabularx}
+\end{table}
+
+\lipsum[8]
+
+\section{Acknowledgments}
+Acknowledgements/ Author's disclosure/ funding statement.
+
+\bibliography{ref}
+
+\appendix
+\section{Online Appendix}
+\lipsum[15]
+\end{document}
