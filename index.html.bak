@@ -20,6 +20,17 @@
 
 </head>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-118CYDFZP1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-118CYDFZP1');
+</script>
+
+
 <body>
 
   <body>
@@ -31,7 +42,7 @@
     <div class="col-md-3">
       <img src="images/munger_headshot.jpg" width=175>
 
-	  <h4><a href='pdfs/mungerCVJan2024.pdf' target="_blank">Curriculum Vitae</a></h4>
+	  <h4><a href='pdfs/mungerCVJul2024.pdf' target="_blank">Curriculum Vitae</a></h4>
 	  <h4><a href="https://scholar.google.com/citations?user=sdMlz0kAAAAJ&hl=en" target="_blank">Google Scholar</a></h4>
       	<h4><a href="https://kevinmunger.substack.com/" target="_blank">Blog</a></h4>
 
@@ -43,24 +54,26 @@
  	  <h4><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Twitter</a></h4>
 
 	  <h4><a href="https://github.com/kmunger" target="_blank">Github: kmunger</a></h4>
-      <h4><a href="mailto:kmm7999@psu.edu" target="_blank">Email: kmm7999@psu.edu</a></h4>
+      <h4>Email: First Name Last Name at Gmail</h4>
       <!--<h4><a href="https://calendly.com/munger_office_hours" target="_blank">Office Hours Signup (Tues 2-4pm)</a></h4>
 	<h4><a href="https://psu.zoom.us/j/97331337873" target="_blank">Office Hours Meeting Link</a></h4>
 	-->
 	  
 	  
       <h4>Present Address</h4>
-      <p>Pond Lab</p>
-      <p>State College, PA</p>
+      <p>Badia Fiesole</p>
+      <p>Florence, IT</p>
 
     </div>
 	<div class="col-md-9">
-		<a href='pdfs/mungerCVJan2024.pdf' target="_blank">CV</a> &emsp; <a href="#publications">Publications</a> &emsp; <a href="#teaching">Teaching</a> &emsp; <a href="#media">Media Coverage</a>   &emsp;     <a href="mailto:kmm7999@psu.edu" target="_blank">Email: kmm7999@psu.edu</a>
+		<a href='pdfs/mungerCVJul2024.pdf' target="_blank">CV</a> &emsp; <a href="#publications">Publications</a> &emsp; <a href="#teaching">Teaching</a> &emsp; <a href="#media">Media Coverage</a>        
 
 
 	<h3>Welcome!</h3>
 	
-      <p>I am the Jeffrey L. Hyde and Sharon D. Hyde and Political Science Board of Visitors Early Career Professor of Political Science and Assistant Professor of Political Science and Social Data Analytics at Penn State University. I study the communication of political information on the internet, and how to make digital social science make sense. </p>
+      <p>I am Assistant Professor and hold the Chair of Computational Social Science in the Department of Political and Social Sciences at the European Union Institue, in Florence.
+	  
+	   I study the communication of political information on the internet, and how to make digital social science make sense. </p>
 	  
 	  		<img src="images/yt2.png" width=750>
 
@@ -90,6 +103,8 @@
 	
 	
 	<p><a href='https://osf.io/cdfh3/' target="_blank">"Political Deepfakes Are As Credible As Other Fake Media And (Sometimes) Real Media" (with Christopher Lucas and Soubhik Barari) </a>. <i> (Conditionally Accepted) Journal of Politics</i>, 2023</p>
+	
+	<p><a href="https://www.cambridge.org/core/elements/youtube-apparatus/36600D69788530F805C650B70976A585" target="_blank"><i>The YouTube Apparatus</i>, Cambridge University Press, 2024</a></p>
 	
 	<p><a href='pdfs/polcomm_whatsapp.pdf' target="_blank">"'Reenviado Muchas Veces': How Platform Warnings Affect WhatsApp Users in Mexico and Colombia" (with Angel Villegas-Cruz, Jorge Gallego, and Mateo Vásquez-Cortés)</a>. <i> Political Communication</i>, 2024</p>
 	
@@ -186,17 +201,7 @@
 
 
 
-	  	<h3>Other Academic Publications</h3>
-		
-
 	
-	<p><a href='https://journalqd.org/article/view/2713' target="_blank">"Quantitative Description of Digital Media" (with Eszter Hargittai and Andrew Guess)</a>. <i>Journal of Quantitative Description: Digital Media</i>, 2021</p>		
-
-<p><a href='pdfs/BenoitMungerSpirling_SSRCchapter.pdf' target="_blank"> "The Dumbing Down of the State of the Union? Trends in the Complexity of Political Communication" (with Arthur Spirling and Ken Benoit). In <i>Can American Govern Itself?</i> (ed. Nolan McCarty and Frances Lee), Cambridge University Press</a></p>
-
-<p><a href='https://www.journals.uchicago.edu/doi/abs/10.1086/703490?journalCode=jop' target="_blank"> "Social Media, Political Science and Democracy". </a> <i>Journal of Politics</i>, 2019. </p>
-
-<p><a href='https://journals.sagepub.com/doi/full/10.1177/2056305119859294' target="_blank"> "The Limited Value of Non-Replicable Field Experiments in Contexts with Low Temporal Validity". </a> <i>Social Media + Society</i>, 2019. </p>
 
 
 	<h3>Selected Popular Press</h3>
@@ -249,7 +254,6 @@
 
 
 	  	<a name="media"><h3>Selected Media Coverage</h3></a>
-		
 		
 		
 	 <p>Politicians now tend to be older than they've been historically. It's causing issues <a href='https://www.npr.org/2023/08/31/1197084257/politicians-now-tend-to-be-older-than-theyve-been-historically-its-causing-issue' target="_blank"><i>NPR</i>, August 2023</a></p>	
