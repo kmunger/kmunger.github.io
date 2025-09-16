@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Seminar on The Internet: Schedule</title>
+  <title>Co-Leaders & Schedule</title>
   <style>
     :root {
       --bg: #0b1020;
@@ -85,4 +85,88 @@
     .table tr:last-child td { border-bottom: none; }
 
     /* Image placeholder */
-    .placeholder.card { grid-column: 1 / -1; display: grid; place-items: center; aspec
+    .placeholder.card { grid-column: 1 / -1; display: grid; place-items: center; aspect-ratio: 16 / 9; }
+    .ph-inner {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      padding: 1rem;
+      text-align: center;
+    }
+    .ph-inner small { display: block; margin-top: .25rem; opacity: .9; }
+    footer { margin-top: 2rem; color: var(--muted); font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Co-Leaders &amp; Schedule</h1>
+      <p>Brief info on the co-leaders and upcoming sessions.</p>
+    </header>
+
+    <section class="grid leaders">
+      <!-- Thomas Streinz -->
+      <article class="card leader">
+        <h3><a href="https://www.eui.eu/people?id=thomas-streinz" target="_blank" rel="noopener">Thomas Streinz</a></h3>
+        <div class="title">Full-time Professor – Joint Chair, EUI Department of Law &amp; Robert Schuman Centre</div>
+        <p>
+          Thomas Streinz is a Joint Chair in Law at the European University Institute (since January 2025). His work focuses on
+          digital governance and global law &amp; technology, including the regulation of the global data economy and digital infrastructures.
+        </p>
+      </article>
+
+      <!-- Kevin Munger -->
+      <article class="card leader">
+        <h3><a href="https://www.eui.eu/people?id=kevin-munger" target="_blank" rel="noopener">Kevin Munger</a></h3>
+        <div class="title">Assistant Professor &amp; Chair of Computational Social Science, EUI Department of Political &amp; Social Sciences</div>
+        <p>
+          Kevin Munger studies how the internet and social media shape political communication, using computational and experimental methods.
+          He is the author of <em>Generation Gap</em> and <em>The YouTube Apparatus</em>, and co-founded the
+          <em>Journal of Quantitative Description: Digital Media</em>.
+        </p>
+      </article>
+    </section>
+
+    <!-- Schedule -->
+    <section class="grid">
+      <article class="card schedule">
+        <h2 style="margin-top:0">Upcoming Sessions</h2>
+        <table class="table" aria-label="Session schedule">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Room</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>8 Oct</td><td>Seminar Room 2</td></tr>
+            <tr><td>22 Oct</td><td>Seminar Room 3</td></tr>
+            <tr><td>5 Nov</td><td>Seminar Room 2</td></tr>
+            <tr><td>19 Nov</td><td>Seminar Room 3</td></tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <!-- Image Placeholder -->
+    <section class="grid">
+      <div class="placeholder card" role="img" aria-label="Image placeholder">
+        <div class="ph-inner">
+          <div>
+            <strong>Image placeholder</strong>
+            <small>Replace this block with your image (e.g., <code>&lt;img src="assets/group.jpg" alt="…" /&gt;</code>).</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Last updated: <!-- set manually if you want --> </span>
+    </footer>
+  </div>
+</body>
+</html>
