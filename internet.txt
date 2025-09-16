@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seminar on The Internet: Schedule</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121830;
+      --text: #e8ecf2;
+      --muted: #b9c1d1;
+      --accent: #8fb3ff;
+      --border: #2a3357;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      background: radial-gradient(1200px 800px at 10% 10%, #11193a 0%, #0b1020 60%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    header {
+      display: grid;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      letter-spacing: .3px;
+    }
+    header p { margin: 0; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card {
+      background: linear-gradient(160deg, var(--card), #0f1430 70%);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    /* Co-leaders */
+    .leaders { grid-column: 1 / -1; display: grid; gap: 1rem; }
+    @media (min-width: 720px) {
+      .leaders { grid-template-columns: 1fr 1fr; }
+    }
+    .leader h3 { margin: 0 0 .25rem 0; font-size: 1.2rem; }
+    .leader .title { color: var(--muted); margin-bottom: .5rem; font-size: .95rem; }
+    .leader p { margin: 0; }
+
+    /* Schedule */
+    .schedule { grid-column: 1 / -1; }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .table th, .table td {
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .table th {
+      background: #0f1733;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: .3px;
+    }
+    .table tr:last-child td { border-bottom: none; }
+
+    /* Image placeholder */
+    .placeholder.card { grid-column: 1 / -1; display: grid; place-items: center; aspec
