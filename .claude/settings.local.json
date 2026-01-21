@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"C:\\\\Users\\\\kmunger\\\\OneDrive - Istituto Universitario Europeo\\\\Documents\\\\GitHub\\\\kmunger.github.io\" log --oneline)",
+      "Bash(git -C \"C:\\\\Users\\\\kmunger\\\\OneDrive - Istituto Universitario Europeo\\\\Documents\\\\GitHub\\\\kmunger.github.io\" log --format=\"%h %ad %s\" --date=short)"
+    ]
+  }
+}
