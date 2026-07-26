@@ -1,0 +1,83 @@
+{
+ "demo": true,
+ "vintage": "SYNTHETIC DEMO — real index in the oven",
+ "n": 4000,
+ "universe": "4,000 simulated scholars (eligibility in the real index: ≥5 works & ≥100 citations in scope)",
+ "w_max": 0.5,
+ "features": [
+  {
+   "key": "frac_works",
+   "label": "Fractional output",
+   "blurb": "Works credited, split among coauthors"
+  },
+  {
+   "key": "cites_frac",
+   "label": "Fractional citations",
+   "blurb": "Citations split among coauthors (Waltman & van Eck)"
+  },
+  {
+   "key": "cites_solo",
+   "label": "Solo citations",
+   "blurb": "Citations to solo-authored work: verifiable individual contribution"
+  },
+  {
+   "key": "share_solo",
+   "label": "Solo share",
+   "blurb": "Share of works that are solo-authored"
+  },
+  {
+   "key": "independence",
+   "label": "Independence",
+   "blurb": "1 / mean team size — resists hyperauthorship"
+  },
+  {
+   "key": "first_author_share",
+   "label": "First-author share",
+   "blurb": "Share of works as first author"
+  },
+  {
+   "key": "cites_per_career_year",
+   "label": "Anti-gerontocracy",
+   "blurb": "Citations per career year — age-normalized impact (cf. Munger 2022)"
+  },
+  {
+   "key": "cites_recent_frac",
+   "label": "Temporal validity",
+   "blurb": "Recency-discounted fractional citations — knowledge depreciates"
+  },
+  {
+   "key": "share_recent_works",
+   "label": "Recent activity",
+   "blurb": "Share of works from the last six years"
+  },
+  {
+   "key": "topic_entropy",
+   "label": "Interdisciplinarity",
+   "blurb": "Shannon entropy of topics published in"
+  },
+  {
+   "key": "outside_share",
+   "label": "External reach",
+   "blurb": "Share of works reaching beyond the core subfields"
+  },
+  {
+   "key": "share_nonarticle",
+   "label": "Format pluralism",
+   "blurb": "Books and chapters alongside articles"
+  }
+ ],
+ "default_weights": {
+  "frac_works": 0.0833,
+  "cites_frac": 0.0833,
+  "cites_solo": 0.0833,
+  "share_solo": 0.0833,
+  "independence": 0.0833,
+  "first_author_share": 0.0833,
+  "cites_per_career_year": 0.0833,
+  "cites_recent_frac": 0.0833,
+  "share_recent_works": 0.0833,
+  "topic_entropy": 0.0833,
+  "outside_share": 0.0833,
+  "share_nonarticle": 0.0833
+ }
+}
