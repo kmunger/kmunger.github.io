@@ -1,17 +1,19 @@
 # The k-index (site)
 
-Static, single-file leaderboard for the Munger Index / metrics-accelerationism
-project. Everything runs in the visitor's browser — no server, no database.
+Static, single-file leaderboard for the k-index. One fixed ranking; visitors
+look themselves up. Everything runs in the visitor's browser — no server.
 
 ## Files
 
-- `index.html` — the whole site (search, weight sliders, live re-ranking).
-- `data/meta.json` — vintage, feature definitions, "official" (LP-winning) weights.
-- `data/authors.json` — names, OpenAlex ids, institutions of the eligible universe.
-- `data/feat.bin` — uint8 binary, row-major n×12: each author's percentile
-  (0–255) on each feature.
-- `prep_site_data.R` — regenerates the three data files from the pipeline
-  outputs in `openalex_polisci/`. Run after each new OpenAlex vintage, then push.
+- `index.html` — the whole site (search, leaderboard, per-author profile card).
+- `data/meta.json` — vintage, feature definitions, the fixed weights.
+- `data/authors.json` — names, OpenAlex ids, institutions, scores — PRE-SORTED
+  by rank (rank = array position + 1).
+- `data/feat.bin` — uint8 binary, row-major n×p, same rank order: each author's
+  percentile (0–255) on each feature, for the profile card.
+- `prep_site_data.R` — regenerates the three data files from
+  `k_index_features_full.rds` + `k_index_weights_full.csv`. Run after each new
+  OpenAlex vintage, then push.
 
 ## Current status
 

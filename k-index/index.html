@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The k-index — a fully customizable ranking of political science</title>
-<meta name="description" content="The k-index: choose your own weights and discover that you, too, are the #1 political scientist. Metrics accelerationism as a service.">
+<title>The k-index — look yourself up</title>
+<meta name="description" content="The k-index: a citation ranking of political science with its weights chosen out loud. Look yourself up.">
 <style>
 :root{
   color-scheme: light;
@@ -12,7 +12,7 @@
   --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
   --grid:#e1e0d9; --baseline:#c3c2b7; --ring:rgba(11,11,11,0.10);
   --accent:#2a78d6; --accent-deep:#1c5cab; --accent-soft:#cde2fb;
-  --gold:#eda100; --warn-bg:#fff7e0; --warn-ink:#6b4a00;
+  --warn-bg:#fff7e0; --warn-ink:#6b4a00;
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -21,69 +21,54 @@
     --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
     --grid:#2c2c2a; --baseline:#383835; --ring:rgba(255,255,255,0.10);
     --accent:#3987e5; --accent-deep:#86b6ef; --accent-soft:#104281;
-    --gold:#c98500; --warn-bg:#33290a; --warn-ink:#f2d48a;
+    --warn-bg:#33290a; --warn-ink:#f2d48a;
   }
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);
   font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;}
-.wrap{max-width:1060px;margin:0 auto;padding:24px 16px 64px}
+.wrap{max-width:940px;margin:0 auto;padding:24px 16px 64px}
 a{color:var(--accent-deep)}
 header h1{font-size:2rem;margin:.2rem 0 0;letter-spacing:-.02em}
-header .tagline{color:var(--ink-2);margin:.35rem 0 0;max-width:60ch}
+header .tagline{color:var(--ink-2);margin:.35rem 0 0;max-width:62ch}
 .vintage{display:inline-block;font-size:.78rem;color:var(--ink-2);
   border:1px solid var(--ring);border-radius:999px;padding:2px 10px;margin-top:10px;background:var(--surface)}
 .demo-banner{background:var(--warn-bg);color:var(--warn-ink);border:1px solid var(--ring);
   border-radius:10px;padding:10px 14px;margin:16px 0 0;font-size:.92rem}
 .panel{background:var(--surface);border:1px solid var(--ring);border-radius:14px;
   padding:16px;margin-top:18px}
-.panel h2{font-size:1.02rem;margin:0 0 10px;letter-spacing:.01em}
-/* ---- search ---- */
-.searchrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.searchbox{position:relative;flex:1;min-width:240px}
-.searchbox input{width:100%;padding:10px 12px;font-size:1rem;border-radius:10px;
+.panel h2{font-size:1.02rem;margin:0 0 10px}
+.searchbox{position:relative}
+.searchbox input{width:100%;padding:11px 13px;font-size:1.05rem;border-radius:10px;
   border:1px solid var(--baseline);background:var(--page);color:var(--ink)}
 .searchbox input:focus{outline:2px solid var(--accent);border-color:transparent}
 .results{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:30;
   background:var(--surface);border:1px solid var(--ring);border-radius:10px;
-  box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:320px;overflow:auto;display:none}
+  box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:340px;overflow:auto;display:none}
 .results button{display:block;width:100%;text-align:left;padding:8px 12px;border:0;
   background:none;color:var(--ink);cursor:pointer;font:inherit}
 .results button .inst{display:block;font-size:.8rem;color:var(--muted)}
-.results button:hover,.results button.active{background:var(--accent-soft)}
+.results button:hover{background:var(--accent-soft)}
 .btn{padding:9px 14px;border-radius:10px;border:1px solid var(--baseline);
   background:var(--surface);color:var(--ink);cursor:pointer;font:inherit;font-size:.92rem}
 .btn:hover{border-color:var(--accent)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-/* ---- sliders ---- */
-.sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px 22px}
-.sl{display:grid;grid-template-columns:1fr 76px;gap:2px 10px;align-items:center;padding:4px 0}
-.sl label{font-size:.9rem;cursor:help}
-.sl .eff{font-size:.78rem;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
-.sl input[type=range]{width:100%;accent-color:var(--accent);grid-column:1/-1;margin:0}
-.slnote{color:var(--muted);font-size:.82rem;margin-top:10px}
-/* ---- author card ---- */
 .card-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
 .card-head .who{font-size:1.25rem;font-weight:650}
 .card-head .who .inst{font-size:.9rem;color:var(--ink-2);font-weight:400;display:block}
 .rankline{font-size:1.05rem;margin:8px 0 2px}
-.rankline .bignum{font-size:1.9rem;font-weight:700;color:var(--accent-deep)}
-.crown{font-size:1.05rem;background:var(--warn-bg);color:var(--warn-ink);
-  border-radius:10px;padding:8px 12px;margin:10px 0;display:none}
+.rankline .bignum{font-size:2rem;font-weight:700;color:var(--accent-deep)}
 .bars{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px 26px}
-.bar{display:grid;grid-template-columns:150px 1fr 42px;gap:8px;align-items:center;font-size:.84rem}
+.bar{display:grid;grid-template-columns:170px 1fr 42px;gap:8px;align-items:center;font-size:.84rem}
 .bar .name{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:help}
 .bar .track{display:block;height:8px;background:var(--grid);border-radius:4px;overflow:hidden}
 .bar .fill{display:block;height:100%;background:var(--accent);border-radius:4px}
 .bar .val{color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
 .cardbtns{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-/* ---- table ---- */
 table{width:100%;border-collapse:collapse;font-size:.95rem}
 th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
   text-align:left;font-weight:600;padding:6px 10px;border-bottom:1px solid var(--baseline)}
 td{padding:7px 10px;border-bottom:1px solid var(--grid)}
-td.rk,th.rk{text-align:right;width:3.2em;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+td.rk,th.rk{text-align:right;width:3.6em;font-variant-numeric:tabular-nums;color:var(--ink-2)}
 td.sc,th.sc{text-align:right;width:5em;font-variant-numeric:tabular-nums}
 td .inst{display:block;font-size:.78rem;color:var(--muted)}
 tr.me td{background:var(--accent-soft)}
@@ -97,8 +82,10 @@ tr.me:hover td{background:var(--accent-soft)}
 footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
 footer p{max-width:75ch}
 details summary{cursor:pointer}
+.wtable{margin-top:8px;font-size:.88rem}
+.wtable td,.wtable th{padding:4px 10px}
 .loading{padding:60px;text-align:center;color:var(--muted)}
-@media (max-width:640px){ .bar{grid-template-columns:120px 1fr 40px} }
+@media (max-width:640px){ .bar{grid-template-columns:130px 1fr 40px} }
 </style>
 </head>
 <body>
@@ -106,65 +93,44 @@ details summary{cursor:pointer}
 
 <header>
   <h1>The k-index</h1>
-  <p class="tagline">A fully customizable ranking of political science.
-  Every citation metric encodes someone's theory of what science is —
-  this one encodes <em>yours</em>. Adjust the weights. Find yourself. Become #1.</p>
+  <p class="tagline">A citation ranking of political science. Every ranking has
+  weights; most pretend otherwise. This one states them. Look yourself up.</p>
   <span class="vintage" id="vintage">loading…</span>
   <div class="demo-banner" id="demoBanner" style="display:none">
-    ⚠️ <strong>Synthetic demo data.</strong> These 4,000 scholars are simulated
-    (the surnames may tip you off). The real index — every eligible political
-    scientist in OpenAlex, 2000–2025 — is currently harvesting.
+    ⚠️ <strong>Synthetic demo data.</strong> These scholars are simulated.
+    The real index is on its way.
   </div>
 </header>
 
 <div id="app" style="display:none">
 
 <section class="panel">
-  <h2>Find a scholar</h2>
-  <div class="searchrow">
-    <div class="searchbox">
-      <input id="q" type="search" placeholder="Type a name… (e.g. Munger)" autocomplete="off"
-             aria-label="Search for a scholar by name">
-      <div class="results" id="results" role="listbox"></div>
-    </div>
-    <button class="btn" id="btnOfficial" title="The weights under which Kevin Munger is #1 (the 'official' k-index)">Official weights</button>
-    <button class="btn" id="btnEqual" title="One twelfth each — the metric of cowards">Equal weights</button>
-    <button class="btn primary" id="btnOptimize" disabled
-      title="Set the weights that maximize the pinned scholar's score (each weight capped at 0.5)">Optimize for me</button>
+  <h2>Find yourself</h2>
+  <div class="searchbox">
+    <input id="q" type="search" placeholder="Type a name…" autocomplete="off"
+           aria-label="Search for a scholar by name">
+    <div class="results" id="results" role="listbox"></div>
   </div>
 </section>
 
 <section class="panel" id="authorCard" style="display:none">
   <div class="card-head">
     <div class="who"><span id="aName"></span><span class="inst" id="aInst"></span></div>
-    <button class="btn" id="btnUnpin">✕ unpin</button>
+    <button class="btn" id="btnUnpin">✕ close</button>
   </div>
-  <div class="rankline">Under the current weights:
-    <span class="bignum" id="aRank"></span> <span id="aOf"></span>
-    &nbsp;·&nbsp; score <span id="aScore" style="font-variant-numeric:tabular-nums"></span>/100</div>
-  <div class="crown" id="crown">👑 <strong>#1.</strong> A defensible metric exists under which this
-    is the best political scientist alive. QED.</div>
+  <div class="rankline"><span class="bignum" id="aRank"></span> <span id="aOf"></span>
+    &nbsp;·&nbsp; k-index <span id="aScore" style="font-variant-numeric:tabular-nums"></span>/100</div>
   <div class="bars" id="aBars"></div>
   <div class="cardbtns">
-    <button class="btn primary" id="btnOptimize2">Optimize for me</button>
-    <button class="btn" id="btnCopy">Copy bragging rights</button>
+    <button class="btn" id="btnCopy">Copy your result</button>
     <a class="btn" id="aLink" target="_blank" rel="noopener" style="display:none;text-decoration:none">OpenAlex profile ↗</a>
   </div>
 </section>
 
 <section class="panel">
-  <h2>Your theory of science <span style="font-weight:400;color:var(--muted)">(weights, each capped at 0.5 — “balance”)</span></h2>
-  <div class="sliders" id="sliders"></div>
-  <p class="slnote">Weights are normalized to sum to 1 before scoring; the gray number
-  is each feature's effective share. Every feature is a percentile rank over the
-  whole universe, so no single axis can be gamed by raw scale. Hover a feature
-  name for its entirely defensible rationale.</p>
-</section>
-
-<section class="panel">
-  <h2>Leaderboard</h2>
+  <h2>The ranking</h2>
   <table id="lb" aria-live="polite">
-    <thead><tr><th class="rk">#</th><th>Scholar</th><th class="sc">Score</th></tr></thead>
+    <thead><tr><th class="rk">#</th><th>Scholar</th><th class="sc">k-index</th></tr></thead>
     <tbody id="lbBody"></tbody>
   </table>
   <div class="tablefoot">
@@ -175,23 +141,22 @@ details summary{cursor:pointer}
 
 <footer>
   <details>
-    <summary><strong>Methodology, briefly</strong></summary>
-    <p>Corpus: all OpenAlex works, 2000–2025, whose primary topic falls in the subfields
-    <em>Political Science &amp; International Relations</em>, <em>Sociology &amp; Political
-    Science</em>, or <em>Communication</em>. Universe: authors with ≥5 in-scope works and
-    ≥100 in-scope citations. Each feature is computed from the raw corpus, then
-    percentile-ranked. A scholar's k-index is the weighted sum of their percentiles —
-    the weights being the only "methodological choice", which is the point. The
-    "official" weights are chosen by a linear program whose objective is stated out
-    loud, unlike everyone else's.</p>
-    <p>Caveats: OpenAlex author disambiguation is a model, and it is wrong at exactly the
-    rate you'd expect; books are undercounted; citation counts carry every bias you've
-    read about. The index updates with each OpenAlex vintage and your rank may go down
-    as well as up.</p>
+    <summary><strong>How this works</strong></summary>
+    <p id="methodsText">Corpus: OpenAlex works, 2000–2025, with a primary topic in
+    Political Science &amp; International Relations, Sociology &amp; Political Science,
+    or Communication. Universe: authors with ≥5 in-scope works and ≥100 in-scope
+    citations. Each feature below is a percentile rank over the whole universe;
+    the k-index is their weighted sum. The weights are a modeling choice, like
+    every other ranking's — the difference is that these are printed:</p>
+    <table class="wtable" id="wTable"><thead><tr><th>Feature</th><th>Weight</th><th>Rationale</th></tr></thead><tbody></tbody></table>
+    <p>Caveats: OpenAlex author disambiguation is imperfect (if your profile is
+    split, so is your score — fix it via ORCID); books are undercounted; citation
+    counts carry the usual biases. The index updates with each OpenAlex vintage;
+    your rank may go down as well as up.</p>
   </details>
   <p id="footVintage"></p>
   <p>Data: <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a>.
-  Concept &amp; weights-as-ideology: Kevin Munger. Nothing on this page is investment advice.</p>
+  Weights-as-disclosure: Kevin Munger.</p>
 </footer>
 
 </div><!-- /app -->
@@ -201,8 +166,8 @@ details summary{cursor:pointer}
 (async function(){
   const $ = id => document.getElementById(id);
 
-  // ---------- load ----------
-  let meta, names, ids, inst, feat, N, P;
+  // ---------- load (authors arrive pre-sorted by rank) ----------
+  let meta, names, ids, inst, scores, feat, N, P;
   try {
     const [m, a, fb] = await Promise.all([
       fetch('data/meta.json').then(r=>r.json()),
@@ -210,85 +175,41 @@ details summary{cursor:pointer}
       fetch('data/feat.bin').then(r=>r.arrayBuffer())
     ]);
     meta = m; names = a.names; ids = a.ids || []; inst = a.inst || [];
+    scores = a.scores || [];
     feat = new Uint8Array(fb);
     N = meta.n; P = meta.features.length;
-    if (feat.length !== N*P) throw new Error('feat.bin size mismatch: '+feat.length+' vs '+(N*P));
+    if (feat.length !== N*P) throw new Error('feat.bin size mismatch');
+    if (names.length !== N)  throw new Error('authors.json size mismatch');
   } catch (e) {
     $('loading').textContent = 'Failed to load data: ' + e.message;
     return;
   }
 
+  const fmt = new Intl.NumberFormat('en-US');
   $('vintage').textContent = 'Vintage: ' + meta.vintage;
   $('footVintage').textContent = 'This release: ' + meta.vintage +
     (meta.universe ? ' · Universe: ' + meta.universe : '');
   if (meta.demo) $('demoBanner').style.display = 'block';
 
-  // ---------- state ----------
-  const FK = meta.features.map(f=>f.key);
-  const W_MAX = meta.w_max || 0.5;
-  let weights = {};                       // raw slider values
-  const officialW = {};
-  FK.forEach(k => officialW[k] = (meta.default_weights && meta.default_weights[k]) || 1/P);
-  FK.forEach(k => weights[k] = officialW[k]);
-  let pinned = -1;                        // author index
-  let shown = 100;
+  // weights table in the footer
+  $('wTable').querySelector('tbody').innerHTML = meta.features.map((f,j)=>{
+    const w = meta.weights ? (meta.weights[f.key] ?? 0) : 0;
+    return `<tr><td>${f.label}</td><td style="font-variant-numeric:tabular-nums">${(100*w).toFixed(1)}%</td><td style="color:var(--muted)">${f.blurb}</td></tr>`;
+  }).join('');
 
-  const scores = new Float64Array(N);
-  let order = new Uint32Array(N);         // indices sorted by score desc
-  const rankOf = new Uint32Array(N);      // author index -> 1-based rank
-
-  // ---------- scoring ----------
-  function rescore(){
-    let tot = 0; FK.forEach(k => tot += weights[k]);
-    const w = FK.map(k => (tot > 0 ? weights[k]/tot : 1/P) / 255);
-    for (let i=0;i<N;i++){
-      let s = 0, base = i*P;
-      for (let j=0;j<P;j++) s += w[j]*feat[base+j];
-      scores[i] = s;
-    }
-    order = new Uint32Array(N); for(let i=0;i<N;i++) order[i]=i;
-    order = order.sort((a,b)=> scores[b]-scores[a] || (names[a]<names[b]?-1:1));
-    for (let r=0;r<N;r++) rankOf[order[r]] = r+1;
-  }
-
-  // ---------- sliders ----------
-  const slWrap = $('sliders'), slInputs = {}, slEff = {};
-  meta.features.forEach(f=>{
-    const div = document.createElement('div'); div.className='sl';
-    div.innerHTML = `<label for="sl_${f.key}" title="${f.blurb.replace(/"/g,'&quot;')}">${f.label}</label>
-      <span class="eff" id="eff_${f.key}"></span>
-      <input type="range" id="sl_${f.key}" min="0" max="${W_MAX}" step="0.01" value="${weights[f.key]}">`;
-    slWrap.appendChild(div);
-    const inp = div.querySelector('input');
-    slInputs[f.key]=inp; slEff[f.key]=div.querySelector('.eff');
-    inp.addEventListener('input', ()=>{ weights[f.key]=+inp.value; refresh(); });
-  });
-  function syncSliders(){
-    let tot=0; FK.forEach(k=>tot+=weights[k]);
-    FK.forEach(k=>{
-      slInputs[k].value = weights[k];
-      const eff = tot>0 ? weights[k]/tot : 1/P;
-      slEff[k].textContent = weights[k].toFixed(2)+' → '+(100*eff).toFixed(0)+'%';
-    });
-  }
-
-  // ---------- leaderboard ----------
-  const fmt = new Intl.NumberFormat('en-US');
-  function scoreDisp(i){ return (scores[i]*100).toFixed(1); }  // scores are 0..1
+  // ---------- leaderboard (rank = array position + 1) ----------
+  let shown = 100, pinned = -1;
   function rowHTML(i){
-    const r = rankOf[i];
-    return `<tr class="${i===pinned?'me':''}"><td class="rk">${r===1?'👑':fmt.format(r)}</td>
+    return `<tr class="${i===pinned?'me':''}"><td class="rk">${i===0?'👑':fmt.format(i+1)}</td>
       <td><button class="namebtn" data-i="${i}">${names[i]}</button>
       ${inst[i]?`<span class="inst">${inst[i]}</span>`:''}</td>
-      <td class="sc">${scoreDisp(i)}</td></tr>`;
+      <td class="sc">${(+scores[i]).toFixed(1)}</td></tr>`;
   }
   function renderTable(){
     const k = Math.min(shown, N);
     let html = '';
-    for (let r=0;r<k;r++) html += rowHTML(order[r]);
-    if (pinned>=0 && rankOf[pinned] > k){
-      html += `<tr class="gap"><td colspan="3">⋮</td></tr>` + rowHTML(pinned);
-    }
+    for (let i=0;i<k;i++) html += rowHTML(i);
+    if (pinned >= k) html += `<tr class="gap"><td colspan="3">⋮</td></tr>` + rowHTML(pinned);
     $('lbBody').innerHTML = html;
     $('countNote').textContent = 'showing '+fmt.format(k)+' of '+fmt.format(N)+' eligible scholars';
     $('btnMore').style.display = k>=N ? 'none':'';
@@ -303,19 +224,11 @@ details summary{cursor:pointer}
   function pin(i){
     pinned = i;
     $('authorCard').style.display='';
-    $('btnOptimize').disabled = false;
-    renderCard(); renderTable();
-    $('authorCard').scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
-  function renderCard(){
-    if (pinned<0) return;
-    const i = pinned;
     $('aName').textContent = names[i];
     $('aInst').textContent = inst[i] || '';
-    $('aRank').textContent = '#'+fmt.format(rankOf[i]);
+    $('aRank').textContent = '#'+fmt.format(i+1);
     $('aOf').textContent = 'of '+fmt.format(N);
-    $('aScore').textContent = scoreDisp(i);
-    $('crown').style.display = rankOf[i]===1 ? 'block' : 'none';
+    $('aScore').textContent = (+scores[i]).toFixed(1);
     const link = $('aLink');
     if (ids[i]) { link.href = 'https://openalex.org/'+ids[i]; link.style.display=''; }
     else link.style.display='none';
@@ -327,44 +240,20 @@ details summary{cursor:pointer}
         <span class="val">${v.toFixed(0)}</span></div>`;
     });
     $('aBars').innerHTML = html;
+    renderTable();
+    $('authorCard').scrollIntoView({behavior:'smooth', block:'nearest'});
   }
   $('btnUnpin').addEventListener('click', ()=>{
-    pinned=-1; $('authorCard').style.display='none';
-    $('btnOptimize').disabled = true; renderTable();
+    pinned=-1; $('authorCard').style.display='none'; renderTable();
   });
-
-  // ---------- presets ----------
-  function setWeights(w){ FK.forEach(k=>weights[k] = w[k] ?? 0); refresh(); }
-  $('btnOfficial').addEventListener('click', ()=> setWeights(officialW));
-  $('btnEqual').addEventListener('click', ()=>{
-    const w={}; FK.forEach(k=>w[k]=+(1/P).toFixed(3)); setWeights(w);
-  });
-  function optimize(){
-    if (pinned<0) return;
-    // maximize own score s.t. 0<=w<=W_MAX, sum w = 1  ==> greedy on best features
-    const idx = FK.map((k,j)=>[feat[pinned*P+j], j]).sort((a,b)=>b[0]-a[0]);
-    const w = {}; FK.forEach(k=>w[k]=0);
-    let left = 1;
-    for (const [,j] of idx){
-      const give = Math.min(W_MAX, left);
-      w[FK[j]] = +give.toFixed(2);
-      left = +(left-give).toFixed(4);
-      if (left<=0) break;
-    }
-    setWeights(w);
-  }
-  $('btnOptimize').addEventListener('click', optimize);
-  $('btnOptimize2').addEventListener('click', optimize);
 
   $('btnCopy').addEventListener('click', ()=>{
     if (pinned<0) return;
-    const r = rankOf[pinned];
-    const txt = `Under a defensible weighting of 12 publishable-sounding bibliometric features, `+
-      `${names[pinned]} is the #${fmt.format(r)} political scientist of the 21st century (k-index, ${meta.vintage}). `+
-      `Choose your own truth: ${location.href}`;
+    const txt = `${names[pinned]} is the #${fmt.format(pinned+1)} political scientist `+
+      `of the 21st century, per the k-index (${meta.vintage}). ${location.href}`;
     navigator.clipboard.writeText(txt).then(()=>{
       $('btnCopy').textContent='Copied ✓';
-      setTimeout(()=>$('btnCopy').textContent='Copy bragging rights', 1500);
+      setTimeout(()=>$('btnCopy').textContent='Copy your result', 1500);
     });
   });
 
@@ -380,8 +269,8 @@ details summary{cursor:pointer}
       if (namesLC[i].includes(s)) hits.push(i);
     box.innerHTML = hits.length
       ? hits.map(i=>`<button data-i="${i}" role="option">${names[i]}
-          <span class="inst">#${fmt.format(rankOf[i])} · ${inst[i]||''}</span></button>`).join('')
-      : `<button disabled>No scholar found — the eligibility floor is cruel (≥5 works, ≥100 citations)</button>`;
+          <span class="inst">#${fmt.format(i+1)}${inst[i]?' · '+inst[i]:''}</span></button>`).join('')
+      : `<button disabled>Not found — the floor is ≥5 in-scope works and ≥100 citations</button>`;
     box.style.display='block';
   }
   let deb; q.addEventListener('input', ()=>{ clearTimeout(deb); deb=setTimeout(doSearch,120); });
@@ -392,15 +281,7 @@ details summary{cursor:pointer}
   });
   document.addEventListener('click', e=>{ if(!e.target.closest('.searchbox')) box.style.display='none'; });
 
-  // ---------- refresh ----------
-  let raf=null;
-  function refresh(){
-    syncSliders();
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(()=>{ rescore(); renderTable(); renderCard(); raf=null; });
-  }
-
-  rescore(); syncSliders(); renderTable();
+  renderTable();
   $('loading').style.display='none';
   $('app').style.display='';
 })();
