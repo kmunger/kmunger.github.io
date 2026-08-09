@@ -59,7 +59,9 @@ header .tagline{color:var(--ink-2);margin:.35rem 0 0;max-width:62ch}
 .rankline .bignum{font-size:2rem;font-weight:700;color:var(--accent-deep)}
 .bars{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px 26px}
 .bar{display:grid;grid-template-columns:170px 1fr 42px;gap:8px;align-items:center;font-size:.84rem}
-.bar .name{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:help}
+.bar .name{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:help;
+  border-bottom:1px dotted var(--muted);width:fit-content;max-width:100%}
+.defterm{cursor:help;border-bottom:1px dotted var(--muted)}
 .bar .track{display:block;height:8px;background:var(--grid);border-radius:4px;overflow:hidden}
 .bar .fill{display:block;height:100%;background:var(--accent);border-radius:4px}
 .bar .val{color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
@@ -94,7 +96,8 @@ details summary{cursor:pointer}
 <header>
   <h1>The k-index</h1>
   <p class="tagline">A citation ranking of political science. Every ranking has
-  weights; most pretend otherwise. This one states them. Look yourself up.</p>
+  weights; most pretend otherwise. This one states them. Look yourself up —
+  or <a href="custom.html">build your own index</a>.</p>
   <span class="vintage" id="vintage">loading…</span>
   <div class="demo-banner" id="demoBanner" style="display:none">
     ⚠️ <strong>Synthetic demo data.</strong> These scholars are simulated.
@@ -155,6 +158,8 @@ details summary{cursor:pointer}
     your rank may go down as well as up.</p>
   </details>
   <p id="footVintage"></p>
+  <p>Disagree with the weights? <a href="custom.html">Build your own index</a> —
+  same scholars, same features, your theory of science.</p>
   <p>Data: <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a>.
   Weights-as-disclosure: Kevin Munger.</p>
 </footer>
@@ -194,7 +199,7 @@ details summary{cursor:pointer}
   // weights table in the footer
   $('wTable').querySelector('tbody').innerHTML = meta.features.map((f,j)=>{
     const w = meta.weights ? (meta.weights[f.key] ?? 0) : 0;
-    return `<tr><td>${f.label}</td><td style="font-variant-numeric:tabular-nums">${(100*w).toFixed(1)}%</td><td style="color:var(--muted)">${f.blurb}</td></tr>`;
+    return `<tr><td><span class="defterm" title="${f.blurb.replace(/"/g,'&quot;')}">${f.label}</span></td><td style="font-variant-numeric:tabular-nums">${(100*w).toFixed(1)}%</td><td style="color:var(--muted)">${f.blurb}</td></tr>`;
   }).join('');
 
   // ---------- leaderboard (rank = array position + 1) ----------
