@@ -95,9 +95,7 @@ details summary{cursor:pointer}
 
 <header>
   <h1>The k-index</h1>
-  <p class="tagline">A citation ranking of political science. Every ranking has
-  weights; most pretend otherwise. This one states them. Look yourself up —
-  or <a href="custom.html">build your own index</a>.</p>
+  <p class="tagline" id="formulaLine" style="font-variant-numeric:tabular-nums">loading…</p>
   <span class="vintage" id="vintage">loading…</span>
   <div class="demo-banner" id="demoBanner" style="display:none">
     ⚠️ <strong>Synthetic demo data.</strong> These scholars are simulated.
@@ -158,8 +156,6 @@ details summary{cursor:pointer}
     your rank may go down as well as up.</p>
   </details>
   <p id="footVintage"></p>
-  <p>Disagree with the weights? <a href="custom.html">Build your own index</a> —
-  same scholars, same features, your theory of science.</p>
   <p>Data: <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a>.
   Weights-as-disclosure: Kevin Munger.</p>
 </footer>
@@ -191,6 +187,13 @@ details summary{cursor:pointer}
   }
 
   const fmt = new Intl.NumberFormat('en-US');
+  const terms = meta.features.map(f => ({f, w: (meta.weights && meta.weights[f.key]) || 0}))
+    .filter(t => t.w > 0).sort((a,b) => b.w - a.w);
+  $('formulaLine').innerHTML = '<strong>k-index</strong> = ' + terms.map(t =>
+      `${t.w.toFixed(3)} × <span class="defterm" title="${t.f.blurb.replace(/"/g,'&quot;')}">${t.f.label}</span>`
+    ).join(' + ') +
+    ' <span style="color:var(--muted)">— each term a percentile rank across all scholars; hover a term for its definition.</span>';
+
   $('vintage').textContent = 'Vintage: ' + meta.vintage;
   $('footVintage').textContent = 'This release: ' + meta.vintage +
     (meta.universe ? ' · Universe: ' + meta.universe : '');
