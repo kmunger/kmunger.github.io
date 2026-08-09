@@ -1,28 +1,28 @@
 {
   "demo": false,
-  "vintage": "OpenAlex snapshot, July 2026",
-  "n": 97345,
-  "universe": "97,345 scholars with ≥5 in-scope works, ≥100 in-scope citations (2000–2025), and ≥20% of career output in the political science subfields",
+  "vintage": "OpenAlex snapshot, August 2026",
+  "n": 36614,
+  "universe": "36,614 scholars with <e2><89><a5>5 works and <e2><89><a5>100 citations in political science journals, 2000<e2><80><93>2025",
   "features": [
     {
       "key": "frac_works",
       "label": "Fractional output",
-      "blurb": "In-scope works, credit split among coauthors"
+      "blurb": "Works in poli sci journals, credit split among coauthors"
     },
     {
       "key": "cites_frac",
       "label": "Fractional citations",
-      "blurb": "In-scope citations split among coauthors"
+      "blurb": "Citations split among coauthors"
     },
     {
       "key": "cites_solo",
       "label": "Solo citations",
-      "blurb": "Citations to solo-authored in-scope work"
+      "blurb": "Citations to solo-authored work"
     },
     {
       "key": "share_solo",
       "label": "Solo share",
-      "blurb": "Share of in-scope works that are solo-authored"
+      "blurb": "Share of works that are solo-authored"
     },
     {
       "key": "independence",
@@ -32,32 +32,32 @@
     {
       "key": "first_author_share",
       "label": "First-author share",
-      "blurb": "Share of in-scope works as first author"
+      "blurb": "Share of works as first author"
     },
     {
       "key": "cites_per_career_year",
       "label": "Citations per career year",
-      "blurb": "Age-normalized in-scope impact"
+      "blurb": "Age-normalized impact"
     },
     {
       "key": "cites_recent_frac",
       "label": "Recent citations",
-      "blurb": "Recency-discounted fractional citations, in scope"
+      "blurb": "Recency-discounted fractional citations"
     },
     {
       "key": "share_recent_works",
       "label": "Recent activity",
-      "blurb": "Share of in-scope works from the last six years"
+      "blurb": "Share of works from the last six years"
     },
     {
       "key": "topic_entropy",
-      "label": "Topic diversity (in scope)",
-      "blurb": "Shannon entropy of in-scope topics"
+      "label": "Topic diversity",
+      "blurb": "Shannon entropy of topics"
     },
     {
       "key": "outside_share",
-      "label": "Outside reach (in scope)",
-      "blurb": "In-scope works touching other subfields"
+      "label": "Outside reach",
+      "blurb": "Works touching subfields beyond political science"
     },
     {
       "key": "share_nonarticle",
@@ -65,48 +65,24 @@
       "blurb": "Books and chapters alongside articles"
     },
     {
-      "key": "full_cites",
-      "label": "Career citations",
-      "blurb": "All citations, all fields, whole career"
-    },
-    {
-      "key": "full_recent_cites",
-      "label": "Career recent citations",
-      "blurb": "Citations earned in the last three years, all fields"
-    },
-    {
-      "key": "full_2yr_citedness",
-      "label": "2-year citedness",
-      "blurb": "Mean citations to recent work, all fields"
-    },
-    {
-      "key": "full_topic_entropy",
-      "label": "Career topic diversity",
-      "blurb": "Shannon entropy over the full topic distribution"
-    },
-    {
-      "key": "full_outside_share",
-      "label": "Career outside share",
-      "blurb": "Share of all work outside the core subfields"
+      "key": "methods_cites",
+      "label": "Methods citations",
+      "blurb": "Citations to work in methodology venues (Political Analysis, PSRM, JEPS, SMR, Survey Research Methods)"
     }
   ],
   "weights": {
     "frac_works": 0,
-    "cites_frac": 0,
-    "cites_solo": 0.002,
-    "share_solo": 0.0023,
-    "independence": 0.0163,
+    "cites_frac": 0.1347,
+    "cites_solo": 0.2372,
+    "share_solo": 0.0287,
+    "independence": 0,
     "first_author_share": 0,
-    "cites_per_career_year": 0.3474,
-    "cites_recent_frac": 0.5,
-    "share_recent_works": 0.1293,
+    "cites_per_career_year": 0,
+    "cites_recent_frac": 0,
+    "share_recent_works": 0.2135,
     "topic_entropy": 0,
     "outside_share": 0,
     "share_nonarticle": 0,
-    "full_cites": 0,
-    "full_recent_cites": 0,
-    "full_2yr_citedness": 0,
-    "full_topic_entropy": 0,
-    "full_outside_share": 0.0028
+    "methods_cites": 0.3859
   }
 }

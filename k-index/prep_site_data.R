@@ -6,8 +6,8 @@
 # carries per-feature percentiles for the profile card.
 #
 # Reads (from OPENALEX_DIR, default C:/Users/kmunger/openalex_polisci):
-#   k_index_features_full.rds  (Stage B-2)  - features incl. full_* columns
-#   k_index_weights_full.csv   (Stage D-4)  - THE weights (feature, weight)
+#   k_index_features_v4.rds   (narrow journal-scoped corpus, 12 features)
+#   k_index_weights_v4.csv    (THE weights: max-margin, v4 universe)
 # Writes (into this script's own folder = the repo's k-index/):
 #   data/meta.json  data/authors.json  data/feat.bin
 # Then: git add k-index && git commit && git push
@@ -49,18 +49,17 @@ LABELS <- tibble::tribble(
 )
 
 # ---- 1. Weights define the feature set (single source of truth) -------------
-w <- read.csv(file.path(data_dir, "k_index_weights_full.csv"))
+w <- read.csv(file.path(data_dir, "k_index_weights_v4.csv"))
 FEATURES <- w$feature
 message("Features (from weights csv): ", length(FEATURES))
 stopifnot(all(FEATURES %in% LABELS$key))
 
 # ---- 2. Universe, percentiles, scores, sort by rank --------------------------
 target_id <- "https://openalex.org/A5015770363"
-PS_CUTOFF <- 0.20   # universe rule: >=20% of career output in the two
-                    # political-science subfields (3320 + 3312)
-feat <- readRDS(file.path(data_dir, "k_index_features_full.rds")) %>%
-  mutate(ps = coalesce(share_3320, 0) + coalesce(share_3312, 0)) %>%
-  filter((eligible & ps >= PS_CUTOFF) | author_id == target_id) %>%
+# v4 universe rule: the journal list IS the discipline filter — eligibility
+# floors only (>=5 works & >=100 citations in the ~6,700 poli sci journals).
+feat <- readRDS(file.path(data_dir, "k_index_features_v4.rds")) %>%
+  filter(eligible | author_id == target_id) %>%
   mutate(across(all_of(FEATURES), ~ coalesce(., 0)))
 
 X <- feat %>%
@@ -79,7 +78,7 @@ writeBin(bytes, file.path(out_dir, "feat.bin"))
 
 # ---- 4. authors.json ----------------------------------------------------------
 inst <- if ("institution" %in% names(X)) X$institution else {
-  ai <- tryCatch(readRDS(file.path(data_dir, "polisci_authors.rds")) %>%
+  ai <- tryCatch(readRDS(file.path(data_dir, "polisci_authors_v4.rds")) %>%
                    select(author_id, institution),
                  error = function(e) NULL)
   if (!is.null(ai)) left_join(X["author_id"], ai, by = "author_id")$institution
@@ -98,9 +97,8 @@ meta <- list(
   demo     = FALSE,
   vintage  = paste("OpenAlex snapshot,", format(Sys.Date(), "%B %Y")),
   n        = nrow(X),
-  universe = sprintf(paste("%s scholars with ≥5 in-scope works, ≥100 in-scope citations",
-                           "(2000–2025), and ≥20%% of career output in the political",
-                           "science subfields"),
+  universe = sprintf(paste("%s scholars with ≥5 works and ≥100 citations in",
+                           "political science journals, 2000–2025"),
                      format(nrow(X), big.mark = ",")),
   features = purrr::pmap(fdefs, function(key, label, blurb)
                list(key = key, label = label, blurb = blurb)),
