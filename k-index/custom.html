@@ -97,7 +97,7 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
   <div class="btnrow">
     <button class="btn" id="btnOfficial">Official weights</button>
     <button class="btn" id="btnEqual">Equal weights</button>
-    <button class="btn primary" id="btnOptimize" disabled title="Set the weights that maximize the pinned scholar's score (each weight capped at 50%)">Optimize for me</button>
+    <button class="btn primary" id="btnOptimize" disabled title="Solve the linear program: find the weights (each ≤0.5, summing to 1) that maximize the pinned scholar's worst-case margin over every rival">Optimize for me</button>
   </div>
   <div class="sliders" id="sliders"></div>
   <p class="slnote">Each slider runs 0–0.5: no single feature may carry more than
@@ -123,6 +123,7 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
     &nbsp;·&nbsp; score <span id="aScore" style="font-variant-numeric:tabular-nums"></span>/100</div>
   <div class="crown" id="crown">👑 <strong>#1.</strong> You have discovered a defensible
   metric under which this is the best political scientist alive. Screenshot it.</div>
+  <p id="optNote" style="display:none;color:var(--ink-2);font-size:.9rem;margin:8px 0 0"></p>
   <div class="cardbtns" style="margin-top:10px">
     <button class="btn" id="btnCopy">Copy your result</button>
   </div>
@@ -151,17 +152,19 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
 </div>
 <div class="loading" id="loading">Loading the universe…</div>
 
+<script src="solver.js"></script>
 <script>
 (async function(){
   const $ = id => document.getElementById(id);
-  let meta, names, ids, scores0, feat, N, P;
+  let meta, names, ids, scores0, feat, N, P, frontier;
   try {
-    const [m, a, fb] = await Promise.all([
+    const [m, a, fb, fr] = await Promise.all([
       fetch('data/meta.json').then(r=>r.json()),
       fetch('data/authors.json').then(r=>r.json()),
-      fetch('data/feat.bin').then(r=>r.arrayBuffer())
+      fetch('data/feat.bin').then(r=>r.arrayBuffer()),
+      fetch('data/frontier.json').then(r=>r.json())
     ]);
-    meta = m; names = a.names; ids = a.ids || [];
+    meta = m; names = a.names; ids = a.ids || []; frontier = fr;
     feat = new Uint8Array(fb);
     N = meta.n; P = meta.features.length;
     if (feat.length !== N*P) throw new Error('feat.bin size mismatch');
@@ -263,18 +266,46 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
   $('btnEqual').addEventListener('click', ()=>{
     const w={}; FK.forEach(k=>w[k]=+(1/P).toFixed(3)); setWeights(w);
   });
+  function solveExact(i){
+    // max-margin LP over the Pareto frontier (provably equal to the full LP)
+    const xs = []; for (let j=0;j<P;j++) xs.push(feat[i*P+j]);
+    const constraints = {}, variables = {};
+    for (let f=0;f<P;f++){
+      variables['w'+f] = { obj: 0, sum: 1, ['cap'+f]: 1 };
+      constraints['cap'+f] = { max: 0.5 };
+    }
+    constraints['sum'] = { equal: 1 };
+    variables['ep'] = { obj: 1, sum: 0 };
+    variables['em'] = { obj: -1, sum: 0 };
+    for (const r of frontier){
+      if (r === i) continue;
+      const cn = 'm'+r;
+      for (let f=0;f<P;f++) variables['w'+f][cn] = (xs[f] - feat[r*P+f]) / 255;
+      variables['ep'][cn] = -1;
+      variables['em'][cn] = 1;
+      constraints[cn] = { min: 0 };
+    }
+    const res = solver.Solve({ optimize: 'obj', opType: 'max', constraints, variables });
+    const w = {}; FK.forEach((k,f)=> w[k] = Math.max(0, res['w'+f] || 0));
+    return { w, eps: (res.ep || 0) - (res.em || 0) };
+  }
   $('btnOptimize').addEventListener('click', ()=>{
     if (pinned<0) return;
-    const idx = FK.map((k,j)=>[feat[pinned*P+j], j]).sort((a,b)=>b[0]-a[0]);
-    const w = {}; FK.forEach(k=>w[k]=0);
-    let left = 1;
-    for (const [,j] of idx){
-      const give = Math.min(0.5, left);
-      w[FK[j]] = +give.toFixed(2);
-      left = +(left-give).toFixed(4);
-      if (left<=0) break;
+    const who = pinned;                     // rescore may re-rank; keep the person
+    const r = solveExact(who);
+    FK.forEach(k => weights[k] = r.w[k] ?? 0);
+    syncSliders(); rescore(); renderTable(); renderCard();   // synchronous, so the note reads fresh ranks
+    const note = $('optNote');
+    note.style.display = 'block';
+    if (r.eps > 1e-9) {
+      note.textContent = 'The linear program found admissible weights that make ' +
+        names[who] + ' the #1 political scientist. They are now set above.';
+    } else {
+      note.textContent = 'No admissible weighting (each feature ≤50%, weights summing to 100%) ' +
+        'makes ' + names[who] + ' #1. The weights above are the best case — rank #' +
+        fmt.format(rankOf[who]) + ' — falling short by ' +
+        (-100*r.eps).toFixed(1) + ' percentile points against their toughest rival.';
     }
-    setWeights(w);
   });
 
   $('btnCopy').addEventListener('click', ()=>{
