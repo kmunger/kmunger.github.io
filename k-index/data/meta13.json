@@ -5,6 +5,11 @@
   "universe": "36,614 scholars with at least 5 works and at least 100 citations in political science journals, 2000-2025",
   "features": [
     {
+      "key": "frac_works",
+      "label": "Fractional output",
+      "blurb": "Number of works in the corpus, each counted as 1/(number of authors): a solo paper counts 1, a five-author paper counts 0.2."
+    },
+    {
       "key": "cites_frac",
       "label": "Fractional citations",
       "blurb": "Each work's total citations divided by its number of authors, summed across works: a 100-citation paper with four authors contributes 25."
@@ -20,6 +25,21 @@
       "blurb": "Fraction of the scholar's works that are solo-authored."
     },
     {
+      "key": "independence",
+      "label": "Independence",
+      "blurb": "Number of works divided by total authorship slots across them, equal to 1/(mean team size). Solo authors score 1."
+    },
+    {
+      "key": "first_author_share",
+      "label": "First-author share",
+      "blurb": "Fraction of works on which the scholar is listed first."
+    },
+    {
+      "key": "cites_per_career_year",
+      "label": "Citations per career year",
+      "blurb": "Total citations divided by years since the scholar's first work in the corpus."
+    },
+    {
       "key": "cites_recent_frac",
       "label": "Recency-weighted citations",
       "blurb": "Fractional citations discounted by the age of the work: a 2025 paper's citations count in full, a 2015 paper's at about a third (x0.9 per year)."
@@ -30,9 +50,19 @@
       "blurb": "Fraction of the scholar's works published in 2020 or later."
     },
     {
+      "key": "topic_entropy",
+      "label": "Topic diversity",
+      "blurb": "Shannon entropy of the scholar's works across research topics: higher means output spread over more distinct topics."
+    },
+    {
       "key": "outside_share",
       "label": "Outside reach",
       "blurb": "Fraction of works whose secondary subject classifications reach beyond political science, sociology, and communication."
+    },
+    {
+      "key": "share_nonarticle",
+      "label": "Format pluralism",
+      "blurb": "Fraction of works that are books, chapters, or reviews rather than journal articles."
     },
     {
       "key": "methods_cites",
@@ -41,12 +71,18 @@
     }
   ],
   "weights": {
+    "frac_works": 0,
     "cites_frac": 0.1499,
     "cites_solo": 0.25,
     "share_solo": 0.027,
+    "independence": 0,
+    "first_author_share": 0,
+    "cites_per_career_year": 0,
     "cites_recent_frac": 0.0827,
     "share_recent_works": 0.2281,
+    "topic_entropy": 0,
     "outside_share": 0.0122,
+    "share_nonarticle": 0,
     "methods_cites": 0.25
   }
 }

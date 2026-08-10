@@ -96,7 +96,6 @@ details summary{cursor:pointer}
 <header>
   <h1>The k-index</h1>
   <p class="tagline" id="formulaLine" style="font-variant-numeric:tabular-nums">loading…</p>
-  <span class="vintage" id="vintage">loading…</span>
   <div class="demo-banner" id="demoBanner" style="display:none">
     ⚠️ <strong>Synthetic demo data.</strong> These scholars are simulated.
     The real index is on its way.
@@ -142,22 +141,36 @@ details summary{cursor:pointer}
 
 <footer>
   <details>
-    <summary><strong>How this works</strong></summary>
-    <p id="methodsText">Corpus: OpenAlex works, 2000–2025, with a primary topic in
-    Political Science &amp; International Relations, Sociology &amp; Political Science,
-    or Communication. Universe: authors with ≥5 in-scope works and ≥100 in-scope
-    citations. Each feature below is a percentile rank over the whole universe;
-    the k-index is their weighted sum. The weights are a modeling choice, like
-    every other ranking's — the difference is that these are printed:</p>
-    <table class="wtable" id="wTable"><thead><tr><th>Feature</th><th>Weight</th><th>Rationale</th></tr></thead><tbody></tbody></table>
-    <p>Caveats: OpenAlex author disambiguation is imperfect (if your profile is
-    split, so is your score — fix it via ORCID); books are undercounted; citation
-    counts carry the usual biases. The index updates with each OpenAlex vintage;
-    your rank may go down as well as up.</p>
+    <summary><strong>About the data and method</strong></summary>
+    <p><strong>Corpus.</strong> The data come from a snapshot of
+    <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> taken in
+    August 2026. The corpus contains 2.87 million works published between 2000 and 2025
+    in 6,691 journals. A journal is included when at least one third of its output is
+    classified by OpenAlex's topic model into the subfields "Political Science and
+    International Relations" or "Sociology and Political Science," at least 10 percent
+    falls into the former specifically, and the source is a journal rather than a book
+    series or publishing platform.</p>
+    <p><strong>Universe and scoring.</strong> The ranking covers the 36,614 authors with
+    at least 5 works and at least 100 citations inside this corpus. Each feature below is
+    computed from the corpus and converted to a percentile rank across these 36,614
+    authors; the k-index is the weighted sum of the percentiles. The weights were chosen
+    by a linear program whose objective was to maximize Kevin Munger's rank, subject to
+    the constraints that weights be non-negative, sum to one, and that no single feature
+    receive more than 0.25. Every ranking is the solution to some such problem; this page
+    states whose.</p>
+    <table class="wtable" id="wTable"><thead><tr><th>Feature</th><th>Weight</th><th>Definition</th></tr></thead><tbody></tbody></table>
+    <p><strong>Limitations.</strong> OpenAlex author disambiguation is imperfect: some
+    scholars' records are split across multiple profiles and common names are sometimes
+    merged. If your record looks wrong here, it is likely wrong in OpenAlex; claiming
+    your profile via ORCID fixes the source. Publication years follow OpenAlex, which
+    often uses the online-first date rather than the issue date. Because the corpus is
+    journal-based, books and book chapters are essentially absent, which disadvantages
+    book-oriented subfields. Citation counts include citations from every field OpenAlex
+    indexes, not only political science. The journal list depends on OpenAlex's topic
+    model and misclassifies at the margins. Affiliation data was too unreliable to
+    display. OpenAlex updates monthly, so current counts will drift from this snapshot.</p>
+    <p>Data: OpenAlex. Site by Kevin Munger.</p>
   </details>
-  <p id="footVintage"></p>
-  <p>Data: <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a>.
-  Weights-as-disclosure: Kevin Munger.</p>
 </footer>
 
 </div><!-- /app -->
@@ -191,12 +204,7 @@ details summary{cursor:pointer}
     .filter(t => t.w > 0).sort((a,b) => b.w - a.w);
   $('formulaLine').innerHTML = '<strong>k-index</strong> = ' + terms.map(t =>
       `${t.w.toFixed(3)} × <span class="defterm" title="${t.f.blurb.replace(/"/g,'&quot;')}">${t.f.label}</span>`
-    ).join(' + ') +
-    ' <span style="color:var(--muted)">— each term a percentile rank across all scholars; hover a term for its definition.</span>';
-
-  $('vintage').textContent = 'Vintage: ' + meta.vintage;
-  $('footVintage').textContent = 'This release: ' + meta.vintage +
-    (meta.universe ? ' · Universe: ' + meta.universe : '');
+    ).join(' + ');
   if (meta.demo) $('demoBanner').style.display = 'block';
 
   // weights table in the footer

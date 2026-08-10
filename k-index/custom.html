@@ -159,10 +159,10 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
   let meta, names, ids, scores0, feat, N, P, frontier;
   try {
     const [m, a, fb, fr] = await Promise.all([
-      fetch('data/meta.json').then(r=>r.json()),
+      fetch('data/meta13.json').then(r=>r.json()),
       fetch('data/authors.json').then(r=>r.json()),
-      fetch('data/feat.bin').then(r=>r.arrayBuffer()),
-      fetch('data/frontier.json').then(r=>r.json())
+      fetch('data/feat13.bin').then(r=>r.arrayBuffer()),
+      fetch('data/frontier13.json').then(r=>r.json())
     ]);
     meta = m; names = a.names; ids = a.ids || []; frontier = fr;
     feat = new Uint8Array(fb);
@@ -301,8 +301,8 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
       note.textContent = 'The linear program found admissible weights that make ' +
         names[who] + ' the #1 political scientist. They are now set above.';
     } else {
-      note.textContent = 'No admissible weighting (each feature ≤50%, weights summing to 100%) ' +
-        'makes ' + names[who] + ' #1. The weights above are the best case — rank #' +
+      note.textContent = 'No admissible weighting (each feature at most 50%, weights summing to 100%) ' +
+        'makes ' + names[who] + ' #1. The weights above are the best case: rank #' +
         fmt.format(rankOf[who]) + ' — falling short by ' +
         (-100*r.eps).toFixed(1) + ' percentile points against their toughest rival.';
     }
