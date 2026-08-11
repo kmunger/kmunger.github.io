@@ -72,16 +72,16 @@
   ],
   "weights": {
     "frac_works": 0,
-    "cites_frac": 0.1499,
+    "cites_frac": 0.15,
     "cites_solo": 0.25,
-    "share_solo": 0.027,
+    "share_solo": 0.03,
     "independence": 0,
     "first_author_share": 0,
     "cites_per_career_year": 0,
-    "cites_recent_frac": 0.0827,
-    "share_recent_works": 0.2281,
+    "cites_recent_frac": 0.08,
+    "share_recent_works": 0.23,
     "topic_entropy": 0,
-    "outside_share": 0.0122,
+    "outside_share": 0.01,
     "share_nonarticle": 0,
     "methods_cites": 0.25
   }

@@ -41,12 +41,12 @@
     }
   ],
   "weights": {
-    "cites_frac": 0.1499,
+    "cites_frac": 0.15,
     "cites_solo": 0.25,
-    "share_solo": 0.027,
-    "cites_recent_frac": 0.0827,
-    "share_recent_works": 0.2281,
-    "outside_share": 0.0122,
+    "share_solo": 0.03,
+    "cites_recent_frac": 0.08,
+    "share_recent_works": 0.23,
+    "outside_share": 0.01,
     "methods_cites": 0.25
   }
 }

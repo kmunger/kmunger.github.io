@@ -61,7 +61,9 @@ header .tagline{color:var(--ink-2);margin:.35rem 0 0;max-width:62ch}
 .bar{display:grid;grid-template-columns:170px 1fr 42px;gap:8px;align-items:center;font-size:.84rem}
 .bar .name{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:help;
   border-bottom:1px dotted var(--muted);width:fit-content;max-width:100%}
-.defterm{cursor:help;border-bottom:1px dotted var(--muted)}
+.defterm{cursor:pointer;border-bottom:1px dotted var(--muted)}
+[data-def]{cursor:pointer}
+tr.defflash td{background:var(--accent-soft);transition:background .3s}
 .bar .track{display:block;height:8px;background:var(--grid);border-radius:4px;overflow:hidden}
 .bar .fill{display:block;height:100%;background:var(--accent);border-radius:4px}
 .bar .val{color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
@@ -199,14 +201,14 @@ details summary{cursor:pointer}
   const terms = meta.features.map(f => ({f, w: (meta.weights && meta.weights[f.key]) || 0}))
     .filter(t => t.w > 0).sort((a,b) => b.w - a.w);
   $('formulaLine').innerHTML = '<strong>k-index</strong> = ' + terms.map(t =>
-      `${t.w.toFixed(3)} × <span class="defterm" title="${t.f.blurb.replace(/"/g,'&quot;')}">${t.f.label}</span>`
+      `${Math.round(100*t.w)}% × <span class="defterm" data-def="${t.f.key}" title="${t.f.blurb.replace(/"/g,'&quot;')}">${t.f.label}</span>`
     ).join(' + ');
   if (meta.demo) $('demoBanner').style.display = 'block';
 
   // weights table in the footer
   $('wTable').querySelector('tbody').innerHTML = meta.features.map((f,j)=>{
     const w = meta.weights ? (meta.weights[f.key] ?? 0) : 0;
-    return `<tr><td><span class="defterm" title="${f.blurb.replace(/"/g,'&quot;')}">${f.label}</span></td><td style="font-variant-numeric:tabular-nums">${(100*w).toFixed(1)}%</td><td style="color:var(--muted)">${f.blurb}</td></tr>`;
+    return `<tr id="def-${f.key}"><td><span class="defterm">${f.label}</span></td><td style="font-variant-numeric:tabular-nums">${Math.round(100*w)}%</td><td style="color:var(--muted)">${f.blurb}</td></tr>`;
   }).join('');
 
   // ---------- leaderboard (rank = array position + 1) ----------
@@ -247,7 +249,7 @@ details summary{cursor:pointer}
     let html='';
     meta.features.forEach((f,j)=>{
       const v = feat[i*P+j]/2.55;
-      html += `<div class="bar"><span class="name" title="${f.blurb.replace(/"/g,'&quot;')}">${f.label}</span>
+      html += `<div class="bar"><span class="name" data-def="${f.key}" title="${f.blurb.replace(/"/g,'&quot;')}">${f.label}</span>
         <span class="track"><span class="fill" style="width:${v.toFixed(1)}%"></span></span>
         <span class="val">${v.toFixed(0)}</span></div>`;
     });
@@ -292,6 +294,19 @@ details summary{cursor:pointer}
     pin(+b.dataset.i); box.style.display='none'; q.value = names[+b.dataset.i];
   });
   document.addEventListener('click', e=>{ if(!e.target.closest('.searchbox')) box.style.display='none'; });
+
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-def]');
+    if (!t) return;
+    const det = document.querySelector('footer details');
+    if (det) det.open = true;
+    const row = document.getElementById('def-' + t.dataset.def);
+    if (row) {
+      row.scrollIntoView({behavior:'smooth', block:'center'});
+      row.classList.add('defflash');
+      setTimeout(() => row.classList.remove('defflash'), 1600);
+    }
+  });
 
   renderTable();
   $('loading').style.display='none';
