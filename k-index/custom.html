@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Build your own k-index</title>
-<meta name="description" content="Set your own weights over 13 bibliometric features and generate your own ranking of political science. Every ranking is a choice; make yours.">
+<meta name="description" content="A theoretically-informed bibliometric database">
 <style>
 :root{
   color-scheme: light;
@@ -84,10 +84,7 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
 
 <header>
   <h1>Build your own k-index</h1>
-  <p class="tagline">The <a href="./">official index</a> is one point in weight space.
-  This page is the rest of it. Set the weights to match your theory of what
-  political science is for; the ranking updates instantly. Weights are
-  normalized to sum to 100%. Hover a feature for its definition.</p>
+  <p class="tagline">The <a href="./">official index</a> is theoretically derived and therefore superior, but if you'd like to engage in a petty data-mining exercise, you can find the index that's optimized for you.</p>
 </header>
 
 <div id="app" style="display:none">
@@ -97,11 +94,10 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
   <div class="btnrow">
     <button class="btn" id="btnOfficial">Official weights</button>
     <button class="btn" id="btnEqual">Equal weights</button>
-    <button class="btn primary" id="btnOptimize" disabled title="Solve the linear program: find the weights (each ≤0.5, summing to 1) that maximize the pinned scholar's worst-case margin over every rival">Optimize for me</button>
+    <button class="btn primary" id="btnOptimize" disabled title="Solve the linear program: find the weights (each at most 0.25, summing to 1) that maximize the pinned scholar's worst-case margin over every rival">Optimize for me</button>
   </div>
   <div class="sliders" id="sliders"></div>
-  <p class="slnote">Each slider runs 0–0.5: no single feature may carry more than
-  half your index. This is called “balance” and it is the only rule.</p>
+  <p class="slnote">Each slider runs 0 to 0.25: no single feature may carry more than a quarter of the index.</p>
 </section>
 
 <section class="panel">
@@ -143,10 +139,6 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
 
 <footer>
   <p id="footVintage"></p>
-  <p>Same universe, features, and percentiles as the
-  <a href="./">official k-index</a>; only the weights are yours. Every ranking
-  of scholars is a weighted sum of somebody's preferences. This one is a
-  weighted sum of yours.</p>
 </footer>
 
 </div>
@@ -205,7 +197,7 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
     const div = document.createElement('div'); div.className='sl';
     div.innerHTML = `<label for="sl_${f.key}" title="${f.blurb.replace(/"/g,'&quot;')}">${f.label}</label>
       <span class="eff" id="eff_${f.key}"></span>
-      <input type="range" id="sl_${f.key}" min="0" max="0.5" step="0.01" value="${weights[f.key]}">`;
+      <input type="range" id="sl_${f.key}" min="0" max="0.25" step="0.01" value="${weights[f.key]}">`;
     slWrap.appendChild(div);
     const inp = div.querySelector('input');
     slInputs[f.key]=inp; slEff[f.key]=div.querySelector('.eff');
@@ -234,7 +226,6 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
     if (pinned>=0 && rankOf[pinned] > k)
       html += `<tr class="gap"><td colspan="3">⋮</td></tr>` + rowHTML(pinned);
     $('lbBody').innerHTML = html;
-    $('countNote').textContent = 'showing '+fmt.format(k)+' of '+fmt.format(N)+' scholars — under YOUR weights';
     $('btnMore').style.display = k>=N ? 'none':'';
   }
   $('lbBody').addEventListener('click', e=>{
@@ -272,7 +263,7 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
     const constraints = {}, variables = {};
     for (let f=0;f<P;f++){
       variables['w'+f] = { obj: 0, sum: 1, ['cap'+f]: 1 };
-      constraints['cap'+f] = { max: 0.5 };
+      constraints['cap'+f] = { max: 0.25 };
     }
     constraints['sum'] = { equal: 1 };
     variables['ep'] = { obj: 1, sum: 0 };
@@ -301,7 +292,7 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
       note.textContent = 'The linear program found admissible weights that make ' +
         names[who] + ' the #1 political scientist. They are now set above.';
     } else {
-      note.textContent = 'No admissible weighting (each feature at most 50%, weights summing to 100%) ' +
+      note.textContent = 'No admissible weighting (each feature at most 25%, weights summing to 100%) ' +
         'makes ' + names[who] + ' #1. The weights above are the best case: rank #' +
         fmt.format(rankOf[who]) + ' — falling short by ' +
         (-100*r.eps).toFixed(1) + ' percentile points against their toughest rival.';
