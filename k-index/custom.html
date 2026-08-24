@@ -133,6 +133,7 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
   </table>
   <div class="tablefoot">
     <button class="btn" id="btnMore">Show 100 more</button>
+    <button class="btn" id="btnDownload">Download this index</button>
     <span class="count" id="countNote"></span>
   </div>
 </section>
@@ -308,6 +309,118 @@ footer{margin-top:26px;color:var(--ink-2);font-size:.9rem}
       $('btnCopy').textContent='Copied ✓';
       setTimeout(()=>$('btnCopy').textContent='Copy your result', 1500);
     });
+  });
+
+  // download a self-contained copy of the current index
+  function escHTML(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function buildStandalone(){
+    let tot = 0; FK.forEach(k => tot += weights[k]);
+    const terms = meta.features
+      .map(f => ({ label:f.label, blurb:f.blurb, w: tot>0 ? (weights[f.key]||0)/tot : 1/P }))
+      .filter(t => Math.round(100*t.w) > 0)
+      .sort((a,b) => b.w - a.w);
+    const formula = terms.map(t => Math.round(100*t.w)+'% × '+escHTML(t.label)).join(' + ');
+    const rows = new Array(N);
+    for (let r=0;r<N;r++){
+      const i = order[r];
+      rows[r] = '<tr'+(i===pinned?' class="me" id="me"':'')+'><td class="rk">'+
+        (r===0?'👑':fmt.format(r+1))+'</td><td>'+escHTML(names[i])+
+        '</td><td class="sc">'+(scores[i]*100).toFixed(1)+'</td></tr>';
+    }
+    const officialURL = new URL('./', location.href).href;
+    const today = new Date().toISOString().slice(0,10);
+    const wtable = terms.map(t =>
+      '<tr><td class="sc">'+Math.round(100*t.w)+'%</td><td>'+escHTML(t.label)+'</td><td>'+escHTML(t.blurb)+'</td></tr>').join('\n');
+    const pinLine = pinned>=0
+      ? '<p class="tagline">Prepared for <a href="#me">'+escHTML(names[pinned])+'</a>, #'+
+        fmt.format(rankOf[pinned])+' of '+fmt.format(N)+'.</p>'
+      : '';
+    return [
+'<!doctype html>',
+'<html lang="en">',
+'<head>',
+'<meta charset="utf-8">',
+'<meta name="viewport" content="width=device-width,initial-scale=1">',
+'<title>A custom k-index</title>',
+'<meta name="description" content="A ranking of '+fmt.format(N)+' political scientists under custom weights">',
+'<style>',
+':root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink-2:#52514e;--muted:#898781;--baseline:#c3c2b7;--ring:rgba(11,11,11,0.10);--accent:#2a78d6;--accent-deep:#1c5cab;--accent-soft:#cde2fb}',
+'@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;--baseline:#383835;--ring:rgba(255,255,255,0.10);--accent:#3987e5;--accent-deep:#86b6ef;--accent-soft:#104281}}',
+'*{box-sizing:border-box}',
+'body{margin:0;background:var(--page);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}',
+'.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 64px}',
+'a{color:var(--accent-deep)}',
+'h1{font-size:1.7rem;margin:.2rem 0 0;letter-spacing:-.02em}',
+'.tagline{color:var(--ink-2);margin:.35rem 0 0;max-width:72ch}',
+'.formula{font-variant-numeric:tabular-nums}',
+'.panel{background:var(--surface);border:1px solid var(--ring);border-radius:14px;padding:16px;margin-top:18px}',
+'input[type=search]{width:100%;padding:10px 12px;font-size:1rem;border-radius:10px;border:1px solid var(--baseline);background:var(--page);color:var(--ink)}',
+'input[type=search]:focus{outline:2px solid var(--accent);border-color:transparent}',
+'table{width:100%;border-collapse:collapse;font-size:.95rem}',
+'th,td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--ring)}',
+'th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}',
+'.rk{width:70px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-2)}',
+'.sc{width:80px;text-align:right;font-variant-numeric:tabular-nums}',
+'tr.me td{background:var(--accent-soft)}',
+'#tb tr{content-visibility:auto;contain-intrinsic-size:auto 35px}',
+'.wt td,.wt th{font-size:.85rem}',
+'.muted{color:var(--muted);font-size:.85rem}',
+'</style>',
+'</head>',
+'<body>',
+'<div class="wrap">',
+'<header>',
+'<h1>A custom k-index</h1>',
+'<p class="tagline formula">'+formula+'</p>',
+pinLine,
+'</header>',
+'<section class="panel">',
+'<input id="q" type="search" placeholder="Filter by name" aria-label="Filter the table by name">',
+'</section>',
+'<section class="panel">',
+'<table><thead><tr><th class="rk">#</th><th>Scholar</th><th class="sc">Score</th></tr></thead><tbody id="tb">',
+rows.join('\n'),
+'</tbody></table>',
+'</section>',
+'<footer class="panel">',
+'<p>Generated on '+today+' from the <a href="'+officialURL+'">k-index</a>. The weights are not the official ones; they were chosen by whoever downloaded this file.</p>',
+'<table class="wt"><thead><tr><th class="sc">Weight</th><th>Feature</th><th>Definition</th></tr></thead><tbody>',
+wtable,
+'</tbody></table>',
+'<p class="muted">'+escHTML('This release: '+meta.vintage+(meta.universe ? ' - '+meta.universe : ''))+'</p>',
+'</footer>',
+'</div>',
+'<scr'+'ipt>',
+'(function(){',
+'var q=document.getElementById("q"),rows=null,lc=null,deb;',
+'function init(){',
+'rows=document.getElementById("tb").rows;lc=new Array(rows.length);',
+'for(var i=0;i<rows.length;i++)lc[i]=rows[i].cells[1].textContent.toLowerCase();',
+'}',
+'q.addEventListener("input",function(){',
+'clearTimeout(deb);',
+'deb=setTimeout(function(){',
+'if(!lc)init();',
+'var s=q.value.trim().toLowerCase();',
+'for(var i=0;i<rows.length;i++)rows[i].style.display=(!s||lc[i].indexOf(s)>-1)?"":"none";',
+'},150);',
+'});',
+'})();',
+'<\/script>',
+'</body>',
+'</html>'
+    ].join('\n');
+  }
+  $('btnDownload').addEventListener('click', ()=>{
+    const blob = new Blob([buildStandalone()], {type:'text/html;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'my-k-index.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
+    const b = $('btnDownload'), t = b.textContent;
+    b.textContent = 'Downloaded ✓';
+    setTimeout(()=>{ b.textContent = t; }, 1500);
   });
 
   // search
