@@ -1,0 +1,231 @@
+{
+  "title": "Kevin Munger's Research Map",
+  "root": "Kevin's Research",
+  "left": [
+    {
+      "name": "Age and Generation",
+      "color": "#E8686B",
+      "children": [
+        {
+          "name": "Generations",
+          "children": [
+            {
+              "name": "Generation Gap: Why the Baby Boomers Still Dominate American Politics and Culture",
+              "thumb": "gengap.png"
+            },
+            {
+              "name": "Generations in Contemporary US Politics: Statistical Aggregations or Collective Political Actors?"
+            }
+          ]
+        },
+        {
+          "name": "Digital Literacy",
+          "children": [
+            {
+              "name": "Digital Literacy and Online Political Behavior"
+            },
+            {
+              "name": "Accessibility and Generalizability: Are Social Media Effects Moderated by Age or Digital Literacy?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Methodology",
+      "color": "#F5B041",
+      "children": [
+        {
+          "name": "Survey Methods",
+          "children": [
+            {
+              "name": "How Accurate Are Survey Responses on Social Media and Politics?"
+            },
+            {
+              "name": "Introducing the Visual Conjoint, with an Application to Candidate Evaluation on Social Media",
+              "thumb": "conjoint.png"
+            },
+            {
+              "name": "Beyond Text: Using AI-Generated Visual Conjoints to Study Gender and Housework Attribution"
+            },
+            {
+              "name": "Political Knowledge and Misinformation in the Era of Social Media: Evidence from the 2015 U.K. Election"
+            }
+          ]
+        },
+        {
+          "name": "Quantitative Text Analysis",
+          "children": [
+            {
+              "name": "Measuring and Explaining Political Sophistication through Textual Complexity"
+            }
+          ]
+        },
+        {
+          "name": "Quantitative Description",
+          "children": [
+            {
+              "name": "Journal of Quantitative Description: Digital Media",
+              "thumb": "jqd.png"
+            },
+            {
+              "name": "#polisci Twitter: A Descriptive Analysis of how Political Scientists Use Twitter in 2019"
+            },
+            {
+              "name": "Measuring Humans in the 21st Century"
+            }
+          ]
+        },
+        {
+          "name": "Temporal Validity",
+          "children": [
+            {
+              "name": "Temporal Validity as Meta-Science",
+              "thumb": "hume.png"
+            },
+            {
+              "name": "The Limited Value of Non-Replicable Field Experiments in Contexts with Low Temporal Validity"
+            },
+            {
+              "name": "Enough?"
+            }
+          ]
+        },
+        {
+          "name": "AI and Social Science",
+          "children": [
+            {
+              "name": "Social Scientists on the Role of AI in Research"
+            },
+            {
+              "name": "AI Allows More Diversity in the Forms of Social Science"
+            },
+            {
+              "name": "Public Opinion in the Age of AI"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "right": [
+    {
+      "name": "Social Media Information Economics",
+      "color": "#F5964A",
+      "children": [
+        {
+          "name": "YouTube",
+          "children": [
+            {
+              "name": "The YouTube Apparatus"
+            },
+            {
+              "name": "Right-Wing YouTube: A Supply and Demand Perspective",
+              "thumb": "ytspiral.png"
+            },
+            {
+              "name": "Pressing Play on Politics: Quantitative Description of YouTube"
+            },
+            {
+              "name": "The Effects of an Informational Intervention on Attention to Anti-Vaccination Content on YouTube"
+            }
+          ]
+        },
+        {
+          "name": "Emerging Platforms",
+          "children": [
+            {
+              "name": "Political Deepfakes are as Credible as Other Fake Media and (Sometimes) Real Media"
+            },
+            {
+              "name": "Fifteen Seconds of Fame: TikTok and the Democratization of Mobile Video on Social Media"
+            },
+            {
+              "name": "Thirst Traps and Quick Cuts: The Effects of TikTok 'Edits' on Evaluations of Politicians"
+            },
+            {
+              "name": "\"Reenviado Muchas Veces\": How Platform Warnings Affect WhatsApp Users in Mexico and Colombia"
+            },
+            {
+              "name": "Connective Effervescence and Streaming Chat During Political Debates"
+            }
+          ]
+        },
+        {
+          "name": "Clickbait Media",
+          "children": [
+            {
+              "name": "All the News That's Fit to Click: The Economics of Clickbait Media"
+            },
+            {
+              "name": "The (Null) Effects of Clickbait Headlines on Polarization, Trust, and Learning"
+            },
+            {
+              "name": "You Won't Believe Our Results! But They Might: Heterogeneity in Beliefs About the Accuracy of Online Media"
+            }
+          ]
+        },
+        {
+          "name": "Elites Online",
+          "children": [
+            {
+              "name": "The Vibes are Off: Did Elon Musk Push Academics off Twitter?"
+            },
+            {
+              "name": "Elites Tweet to Get Feet off the Streets: Using Social Media to Measure Regime Response to Protest"
+            },
+            {
+              "name": "The Digitally Accountable Public Representation Database: Online Communication by U.S. Officials"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Digital Field Experiments",
+      "color": "#3FB8B5",
+      "children": [
+        {
+          "name": "Streaming Chat",
+          "children": [
+            {
+              "name": "The Effect of Streaming Chat on Perceptions of Debates"
+            }
+          ]
+        },
+        {
+          "name": "Twitter Interventions",
+          "children": [
+            {
+              "name": "Tweetment Effects on the Tweeted: Experimentally Reducing Racist Harassment",
+              "thumb": "tweetment.png"
+            },
+            {
+              "name": "Don't @ Me: Experimentally Reducing Partisan Incivility on Twitter"
+            },
+            {
+              "name": "Tweeting for Peace: Experimental Evidence from the 2016 Colombian Plebiscite"
+            }
+          ]
+        },
+        {
+          "name": "A/B Testing",
+          "children": [
+            {
+              "name": "The Upworthy Research Archive: A Time Series of 32,488 Experiments",
+              "thumb": "upworthy.png"
+            }
+          ]
+        },
+        {
+          "name": "Migration",
+          "children": [
+            {
+              "name": "Overcoming Digital Barriers: Evidence from Venezuelan Migrants in Colombia"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
