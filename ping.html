@@ -30,8 +30,8 @@
   hr { border: 0; border-top: 1px solid #000; }
   img.banner { width: 100%; max-width: 704px; height: auto; image-rendering: pixelated; border: 1px solid #000; }
   table { border-collapse: collapse; width: 100%; }
-  .wide { width: min(1000px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); overflow-x: auto; }
-  .wide table { min-width: 640px; }
+  @media (max-width: 600px) { th, td { padding: 3px 4px; font-size: 14px; hyphens: auto; } }
+  @media (max-width: 380px) { th, td { padding: 2px 3px; font-size: 12px; } .note { font-size: 11px; } }
   .note { display: block; font-size: 14px; line-height: 1.2; margin-top: 2px; }
   th, td { border: 1px solid #000; padding: 4px 8px; text-align: left; vertical-align: top; }
   th { background: #c0c0c0; }
@@ -56,31 +56,29 @@
 
 <h2 id="schedule">Schedule</h2>
 
-<div class="wide">
 <table>
 <tr><th>Date</th><th>Room</th><th>Presenter</th><th>Title</th></tr>
 <tr><th colspan="4">2026 &middot; 14:30&ndash;15:45</th></tr>
-<tr><td>Wed 14 Oct<br><span class="note"><b>Exceptionally starts at 17:00</b></span></td><td>Seminar Room 3, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><a href="https://www.eui.eu/people?id=amelie-ruiz-dormet">Am&eacute;lie Ruiz-Dormet</a> (EUI)</td><td>Gender Trouble in Online Childfree Communities. A Computational Grounded Analysis of Childfree Narratives on Reddit (2020&ndash;2024)</td></tr>
-<tr><td rowspan="2">Wed 28 Oct</td><td rowspan="2">Sala Belvedere, <a href="https://www.eui.eu/buildings?id=villa-schifanoia-1">Villa Schifanoia</a></td><td><a href="https://soc.univie.ac.at/en/about-us/filippo-andrei">Filippo Andrei</a> (UniVie)</td><td>Knowing More, Seeing Risk Differently: Algorithmic Literacy and Online Risk Perception</td></tr>
+<tr><td>Wed&nbsp;14&nbsp;Oct<br><span class="note"><b>Exceptionally starts at 17:00</b></span></td><td>Seminar Room 3, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><a href="https://www.eui.eu/people?id=amelie-ruiz-dormet">Am&eacute;lie Ruiz-Dormet</a> (EUI)</td><td>Gender Trouble in Online Childfree Communities. A Computational Grounded Analysis of Childfree Narratives on Reddit (2020&ndash;2024)</td></tr>
+<tr><td rowspan="2">Wed&nbsp;28&nbsp;Oct</td><td rowspan="2">Sala Belvedere, <a href="https://www.eui.eu/buildings?id=villa-schifanoia-1">Villa Schifanoia</a></td><td><a href="https://soc.univie.ac.at/en/about-us/filippo-andrei">Filippo Andrei</a> (UniVie)</td><td>Knowing More, Seeing Risk Differently: Algorithmic Literacy and Online Risk Perception</td></tr>
 <tr><td>Emelie Karlsson (Uppsala)</td><td>Media Narratives and the Second-Order Effects of Digital Election Interference</td></tr>
-<tr><td>Wed 4 Nov</td><td>Sala Belvedere, <a href="https://www.eui.eu/buildings?id=villa-schifanoia-1">Villa Schifanoia</a></td><td><a href="https://www.mateovasquezcortes.com/">Mateo V&aacute;squez-Cort&eacute;s</a> (UC San Diego)</td><td>Elevating Positive Narratives: WhatsApp Campaign Effects on Migrant-Host Relations in Colombia</td></tr>
-<tr><td>Wed 11 Nov</td><td>Seminar Room 3, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><a href="https://www.prashantgarg.org/">Prashant Garg</a> (Bocconi)</td><td></td></tr>
-<tr><td>Wed 25 Nov</td><td>SPS Meeting Room, Villa Sanfelice</td><td><a href="https://andreaskuepfer.github.io/">Andreas K&uuml;pfer</a> (TU Darmstadt)</td><td></td></tr>
-<tr><td>Wed 9 Dec</td><td>Seminar Room 1, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><a href="https://jihyepark.me/">Jihye Park</a> (Geneva)</td><td>Expand and Exempt: Compensation and the Politics of US Chip Export Controls</td></tr>
+<tr><td>Wed&nbsp;4&nbsp;Nov</td><td>Sala Belvedere, <a href="https://www.eui.eu/buildings?id=villa-schifanoia-1">Villa Schifanoia</a></td><td><a href="https://www.mateovasquezcortes.com/">Mateo V&aacute;squez-Cort&eacute;s</a> (UC San Diego)</td><td>Elevating Positive Narratives: WhatsApp Campaign Effects on Migrant-Host Relations in Colombia</td></tr>
+<tr><td>Wed&nbsp;11&nbsp;Nov</td><td>Seminar Room 3, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><a href="https://www.prashantgarg.org/">Prashant Garg</a> (Bocconi)</td><td></td></tr>
+<tr><td>Wed&nbsp;25&nbsp;Nov</td><td>SPS Meeting Room, Villa Sanfelice</td><td><a href="https://andreaskuepfer.github.io/">Andreas K&uuml;pfer</a> (TU Darmstadt)</td><td>Parliamentary Debate on Video: Seeking Eye Contact, Power, and Online Attention</td></tr>
+<tr><td>Wed&nbsp;9&nbsp;Dec</td><td>Seminar Room 1, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><a href="https://jihyepark.me/">Jihye Park</a> (Geneva)</td><td>Expand and Exempt: Compensation and the Politics of US Chip Export Controls</td></tr>
 <tr><th colspan="4">2027 &middot; 16:30&ndash;17:45</th></tr>
-<tr><td>Wed 13 Jan</td><td>Seminar Room 3, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><a href="https://eszter.com/">Eszter Hargittai</a> (University of Zurich)</td><td></td></tr>
-<tr><td>Wed 27 Jan</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 10 Feb</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 24 Feb</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 10 Mar</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 24 Mar</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 7 Apr</td><td>Sala del Capitolo, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 21 Apr</td><td>Sala del Capitolo, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 5 May</td><td>Sala del Capitolo, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 19 May</td><td>Seminar Room 3, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
-<tr><td>Wed 2 Jun</td><td>Sala del Capitolo, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;13&nbsp;Jan</td><td>Seminar Room 3, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><a href="https://eszter.com/">Eszter Hargittai</a> (University of Zurich)</td><td></td></tr>
+<tr><td>Wed&nbsp;27&nbsp;Jan</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;10&nbsp;Feb</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;24&nbsp;Feb</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;10&nbsp;Mar</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;24&nbsp;Mar</td><td>Seminar Room 2, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;7&nbsp;Apr</td><td>Sala del Capitolo, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;21&nbsp;Apr</td><td>Sala del Capitolo, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;5&nbsp;May</td><td>Sala del Capitolo, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;19&nbsp;May</td><td>Seminar Room 3, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
+<tr><td>Wed&nbsp;2&nbsp;Jun</td><td>Sala del Capitolo, <a href="https://www.eui.eu/buildings?id=badia-fiesolana">Badia Fiesolana</a></td><td><i>TBA</i></td><td></td></tr>
 </table>
-</div>
 
 <p class="small">Getting there: <a href="https://www.eui.eu/en/public/about/campus">EUI campus map and buildings</a>. The EUI runs a shuttle bus between buildings.</p>
 
@@ -123,7 +121,7 @@
 
 <p class="small">Organized by <a href="https://www.eui.eu/people?id=kevin-munger">Kevin Munger</a> and Sebastian Ramirez-Ruiz.<br>
 <tt>$ ping eui.eu</tt><br>
-Last updated 23 October 2026.</p>
+Last updated 26 October 2026.</p>
 
 </body>
 </html>
